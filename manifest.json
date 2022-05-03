@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "SEI pluriDocs!",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "js": [
+        "js/libs/jquery-3.6.0.min.js",
+        "js/libs/papaparse.js",
+        "js/libs/bootstrap.min.js",
+        "js/index.js"
+      ],
+      "css": [
+        "css/libs/bootstrap.min.css"
+      ],
+      "all_frames": true,
+      "matches": [
+        "*://*.br/*controlador.php?acao=arvore_visualizar*"
+      ]
+    }
+  ]
+}
