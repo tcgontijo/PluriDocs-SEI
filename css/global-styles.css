@@ -1,0 +1,8 @@
+.blocker {
+  background-color: transparent !important;
+}
+
+.divisoria {
+  height: auto;
+  border-bottom: solid 1px;
+}
