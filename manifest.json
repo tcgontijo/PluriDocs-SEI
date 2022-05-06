@@ -6,12 +6,14 @@
     {
       "js": [
         "js/libs/jquery-3.6.0.min.js",
-        "js/libs/jquery.modal.min.js",
+        "js/libs/jquery-ui.js",
         "js/libs/papaparse.js",
         "js/ifrVisualizacao.js"
       ],
       "css": [
-        "css/libs/jquery.modal.min.css",
+        "css/libs/jquery-ui.css",
+        "css/libs/jquery-ui.structure.css",
+        "css/libs/jquery-ui.theme.css",
         "css/global-styles.css"
       ],
       "all_frames": true,
@@ -22,13 +24,16 @@
     {
       "js": [
         "js/libs/jquery-3.6.0.min.js",
-        "js/libs/jquery.modal.min.js",
+        "js/libs/jquery-ui.js",
         "js/global.js"
       ],
       "css": [
-        "css/libs/jquery.modal.min.css",
+        "css/libs/jquery-ui.css",
+        "css/libs/jquery-ui.structure.css",
+        "css/libs/jquery-ui.theme.css",
         "css/global-styles.css"
       ],
+      "runAt": "document_start",
       "all_frames": true,
       "matches": [
         "*://*.br/*controlador.php?acao=procedimento_trabalhar*"

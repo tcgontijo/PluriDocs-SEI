@@ -6,28 +6,63 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="css/libs/jquery-ui.css">
+  <link rel="stylesheet" href="css/global-styles.css">
+  <link rel="stylesheet" href="css/libs/jquery-ui.icon-font.min.css">
 </head>
 
 <body>
 
-  <div id="docModelo" class="modal">
-    <a href="#" rel="modal:close">Close</a>
-    <h5 class="modal-title">Documento modelo - Seleção</h5>
-    <div">
-      <label>Selecione abaixo, dentre os documentos constantes na árvore do processo, o modelo para reprodução em
-        lote:</label>
-      <select class="form-select">
-        <option value="teste">Teste</option>
-      </select>
-      <div>
-        <button type="button" rel="modal:close">Cancelar</button>
-        <button id="btn-ok-modal1">
-          OK
-        </button>
-      </div>
-    </div>
+  <div id="docModelo" title="Documento modelo - Seleção">
+    <label>Selecione abaixo, dentre os documentos constantes na árvore do processo, o modelo para reprodução em
+      lote:</label>
+    <select>
+      <option value="teste">Teste</option>
+    </select>
   </div>
 
+  <a id="btn-modal">
+    <img src="https://picsum.photos/100/100">
+  </a>
 
+  <span class="ui-icon ui-icon-clock" style="display:inline-block"></span><input type="text" />
+
+
+  <p class="ui-widget-content
+  ui-state-default ui-helper-clearfix">
+    <span style="float: left; margin-right: 0.5em;" class="ui-icon ui-icon-jquery">icon</span>
+    ui-icon-jquery
+  </p>
+
+  <script src="js/libs/jquery-3.6.0.min.js"></script>
+  <script src="js/libs/jquery-ui.js"></script>
+
+  <script>
+    $("#docModelo").dialog({
+      autoOpen: false,
+      modal: true,
+      buttons: [
+        {
+          text: "Ok",
+          icon: "ui-icon-heart",
+          click: function () {
+            $(this).dialog("close");
+          }
+        },
+        {
+          text: "Cancelar",
+          icon: "ui-icon-cancel",
+          iconPosition: "beginning",
+          click: function () {
+            $(this).dialog("close");
+          }
+        }
+      ]
+    });
+    $("#btn-modal").on('click', () => {
+      $("#docModelo").dialog("open");
+    });
+  </script>
 </body>
+
 </html>
