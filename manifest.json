@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "SEI pluriDocs!",
+  "name": "PluriDocs - SEI!",
   "version": "1.0",
   "content_scripts": [
     {
@@ -8,35 +8,27 @@
         "js/libs/jquery-3.6.0.min.js",
         "js/libs/jquery-ui.js",
         "js/libs/papaparse.js",
-        "js/ifrVisualizacao.js"
+        "js/injector.js"
       ],
       "css": [
         "css/libs/jquery-ui.css",
-        "css/libs/jquery-ui.structure.css",
-        "css/libs/jquery-ui.theme.css",
+        "css/libs/jquery-ui.icon-font.min.css",
         "css/global-styles.css"
       ],
       "all_frames": true,
       "matches": [
         "*://*.br/*controlador.php?acao=arvore_visualizar*"
       ]
-    },
+    }
+  ],
+  "web_accessible_resources": [
     {
-      "js": [
-        "js/libs/jquery-3.6.0.min.js",
-        "js/libs/jquery-ui.js",
-        "js/global.js"
+      "resources": [
+        "js/*",
+        "css/*"
       ],
-      "css": [
-        "css/libs/jquery-ui.css",
-        "css/libs/jquery-ui.structure.css",
-        "css/libs/jquery-ui.theme.css",
-        "css/global-styles.css"
-      ],
-      "runAt": "document_start",
-      "all_frames": true,
       "matches": [
-        "*://*.br/*controlador.php?acao=procedimento_trabalhar*"
+        "<all_urls>"
       ]
     }
   ]
