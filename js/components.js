@@ -1,10 +1,10 @@
-import * as funtions from './functions.js';
+import * as functions from './functions.js';
 
 export const botaoAcao = (imgURL) => {
   $("#divArvoreAcoes").append($(`
-  <a id = "btn-modal">
-    <img src="${imgURL}">
-  </a>
+    <a id="btn-modal" class="botaoSEI" tabindex="451">
+      <img class="infraCorBarraSistema" src="${imgURL}" title="Inserir arquivos em lote">
+    </a>
 `))
 
   $('#btn-modal').click(() => {
@@ -12,17 +12,21 @@ export const botaoAcao = (imgURL) => {
   });
 };
 
-export const modalSelecaoDoc = (selectContent) => {
-  $("body").append(`
-  <div id="docModelo" title="Documento modelo - Seleção">
-  <p>Selecione abaixo, dentre os documentos constantes na árvore do processo, o modelo para reprodução em lote:</p>
-  <select>${selectContent}</select>
-  </div>
+
+export const modalSelecaoDoc = () => {
+  $('body').append(`
+    <div id="docModelo" title="Documento modelo - Seleção">
+      <p>Selecione abaixo, dentre os documentos constantes na árvore do processo, o modelo para reprodução em lote:</p>
+      <select>${functions.getDocsArvore()}</select>
+    </div>
   `)
 
   $('#docModelo').dialog({
     autoOpen: false,
     resizable: false,
+    classes: {
+      "ui-dialog": "modalPluri"
+    },
     width: 500,
     show: 100,
     modal: true,
@@ -41,23 +45,28 @@ export const modalSelecaoDoc = (selectContent) => {
         prepend: `<span class='ui-icon ui-icon-circle-b-close'></span>`,
         click: function () {
           $(this).dialog("close");
-          funtions.clearInputs();
-          //$('input:file').each(function () { $(this).trigger('reset') });
+          functions.clearInputs();
         }
       }
     ]
   });
+
+  //$('#docModelo select').selectmenu();
 }
 
+
 export const modalAnaliseDocModelo = () => {
-  $("body").append(`
+  $('body').append(`
   <div id="analiseDocModelo" title="Documento modelo - Campos dinâmicos">
-    <p>Análise do documento modelo:</p>
+  <p>Análise do documento modelo:</p>
   </div>
   `)
 
   $('#analiseDocModelo').dialog({
     autoOpen: false,
+    classes: {
+      "ui-dialog": "modalPluri"
+    },
     resizable: false,
     width: 500,
     modal: true,
@@ -84,25 +93,28 @@ export const modalAnaliseDocModelo = () => {
         prepend: `<span class='ui-icon ui-icon-circle-b-close'></span>`,
         click: function () {
           $(this).dialog("close");
-          funtions.clearInputs();
+          functions.clearInputs();
         }
       }
     ]
   });
 }
 
-export const modalBaseDados = () => {
 
-  $("body").append(`
+export const modalBaseDados = () => {
+  $('body').append(`
   <div id="baseDados" title="Base de dados">
-    <p>Selecione um arquivo no formato CSV para servir como base de dados para a geração de documentos em lote:</p>
-    <input id="inputBD" type="file"></input>
+  <p>Selecione um arquivo no formato CSV para servir como base de dados para a geração de documentos em lote:</p>
+  <input id="inputBD" type="file"></input>
   </div>
   `)
 
   $('#baseDados').dialog({
     autoOpen: false,
     resizable: false,
+    classes: {
+      "ui-dialog": "modalPluri"
+    },
     width: 500,
     modal: true,
     show: 200,
@@ -110,15 +122,10 @@ export const modalBaseDados = () => {
       {
         id: 'btnEnviaCSV',
         text: "Enviar",
+        disabled: true,
         prepend: `<span class='ui-icon ui-icon-upload'></span>`,
         click: () => {
-          Papa.parse($("#inputBD")[0].files[0], {
-            header: true,
-            skipEmptyLines: true,
-            complete: (results) => {
-              console.log("Finished:", results.data);
-            }
-          })
+          functions.parseCSV($("#inputBD")[0].files[0]);
           //$(this).dialog("close");
         }
       },
@@ -135,27 +142,22 @@ export const modalBaseDados = () => {
         prepend: `<span class='ui-icon ui-icon-circle-b-close'></span>`,
         click: function () {
           $(this).dialog("close");
-          funtions.clearInputs();
+          functions.clearInputs();
         }
       }
-    ]
+    ],
+    open: () => {
+      if (!$('#inputBD').val())
+        $("#btnEnviaCSV").prop('disabled', true).addClass('ui-button-disabled ui-state-disabled')
+    }
   });
-  $("#btnEnviaCSV").attr('disabled', 'disabled');
 
   $("#inputBD").change(() => {
-    $("#btnEnviaCSV").removeAttr('disabled');
+    $("#btnEnviaCSV").prop('disabled', false).removeClass('ui-button-disabled ui-state-disabled');
   })
-
-  // $("#btnEnviaCSV").click(() => {
-  //   Papa.parse($("#inputBD")[0].files[0], {
-  //     header: true,
-  //     skipEmptyLines: true,
-  //     complete: (results) => {
-  //       console.log("Finished:", results.data);
-  //     }
-  //   })
-  // });
 
 }
 
-  // CSV PARSER
+
+
+

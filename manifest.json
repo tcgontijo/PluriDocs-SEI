@@ -25,7 +25,8 @@
     {
       "resources": [
         "js/*",
-        "css/*"
+        "css/*",
+        "img/*"
       ],
       "matches": [
         "<all_urls>"

@@ -1,0 +1,31 @@
+a#btn-modal {
+    display: inline-block;
+}
+
+.modalPluri {
+    font-size: 1.5em !important;
+}
+
+.modalPluri input[type=file]::file-selector-button {
+    height: 30px;
+}
+
+.modalPluri input {
+    width: 470px;
+}
+
+.modalPluri select {
+    padding: 6px 0px;
+    width: 470px;
+}
+
+.ui-dialog-buttonpane .ui-dialog-buttonset {
+    display: flex !important;
+}
+
+.ui-dialog-buttonpane .ui-dialog-buttonset .ui-button {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-evenly !important;
+}
