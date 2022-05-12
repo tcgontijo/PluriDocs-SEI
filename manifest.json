@@ -5,15 +5,15 @@
   "content_scripts": [
     {
       "js": [
-        "js/libs/jquery-3.6.0.min.js",
-        "js/libs/jquery-ui.js",
-        "js/libs/papaparse.js",
-        "js/injector.js"
+        "src/js/libs/jquery-3.6.0.min.js",
+        "src/js/libs/jquery-ui.js",
+        "src/js/libs/papaparse.js",
+        "src/js/injector.js"
       ],
       "css": [
-        "css/libs/jquery-ui.css",
-        "css/libs/jquery-ui.icon-font.min.css",
-        "css/global-styles.css"
+        "src/css/libs/jquery-ui.css",
+        "src/css/libs/jquery-ui.icon-font.min.css",
+        "src/css/global-styles.css"
       ],
       "all_frames": true,
       "matches": [
@@ -24,9 +24,9 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "js/*",
-        "css/*",
-        "img/*"
+        "src/js/*",
+        "src/css/*",
+        "src/img/*"
       ],
       "matches": [
         "<all_urls>"
