@@ -1,17 +1,20 @@
-import * as components from "./components.js";
+import BotaoAcao from "./components/BotaoAcao.js"
+import ModalSelecaoDoc from "./components/ModalSelecaoDoc.js"
+import ModalAnaliseModelo from "./components/ModalAnaliseModelo.js"
+import ModalSelecaoBaseDados from "./components/ModalSelecaoBaseDados.js"
 
 
 //Botão na área de ações para chamar o serviço
-components.botaoAcao(chrome.runtime.getURL("img/btn.png"));
+BotaoAcao(chrome.runtime.getURL("src/img/btn.png"));
 
 //MODAL 01: Seleção do documento modelo na árvore do processo
-components.modalSelecaoDoc();
+ModalSelecaoDoc();
 
 //MODAL 02: Análise do documento modelo com captura de campos dinâmicos
-components.modalAnaliseDocModelo();
+ModalAnaliseModelo();
 
 //MODAL 03: Escolha da base de dados no formato .CSV
-components.modalBaseDados();
+ModalSelecaoBaseDados();
 
 //MODAL 04: Análise da Base de dados indicando os cabeçalhos e a quantidade de registros
 

@@ -29,3 +29,9 @@ a#btn-modal {
     align-items: center !important;
     justify-content: space-evenly !important;
 }
+
+.ui-widget-overlay {
+    opacity: .50 !important;
+    filter: Alpha(Opacity=50) !important;
+    background: rgb(50, 50, 50) !important;
+}
