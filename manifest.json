@@ -8,17 +8,34 @@
         "src/js/libs/jquery-3.6.0.min.js",
         "src/js/libs/jquery-ui.js",
         "src/js/libs/papaparse.js",
-        "src/js/injector.js"
+        "src/js/injectors/injetor_processoGlobal.js"
       ],
       "css": [
         "src/css/libs/jquery-ui.css",
         "src/css/libs/jquery-ui.icon-font.min.css",
-        "src/css/global-styles.css"
+        "src/css/global.css"
+      ],
+      "all_frames": true,
+      "matches": [
+        "*://*.br/*controlador.php?acao=procedimento_trabalhar*"
+      ]
+    },
+    {
+      "js": [
+        "src/js/libs/jquery-3.6.0.min.js",
+        "src/js/libs/jquery-ui.js",
+        "src/js/injectors/injetor_processoVisualizacao.js"
+      ],
+      "css": [
+        "src/css/libs/jquery-ui.css",
+        "src/css/libs/jquery-ui.icon-font.min.css",
+        "src/css/visualizacao.css"
       ],
       "all_frames": true,
       "matches": [
         "*://*.br/*controlador.php?acao=arvore_visualizar*"
-      ]
+      ],
+      "run_at": "document_idle"
     }
   ],
   "web_accessible_resources": [

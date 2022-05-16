@@ -1,12 +1,13 @@
-const BotaoAcao = (imgURL) => {
-  $("#divArvoreAcoes").append($(`
-    <a id="btn-modal" class="botaoSEI" tabindex="451">
-      <img class="infraCorBarraSistema" src="${imgURL}" title="Inserir arquivos em lote">
+const BotaoAcao = (urlImg) => {
+
+  $("#divArvoreAcoes").append(`
+    <a id="btn-modal" class="botaoSEI">
+    <img class="infraCorBarraSistema" src=${urlImg} title="Inserir arquivos em lote">
     </a>
-`))
+  `)
 
   $('#btn-modal').click(() => {
-    $("#docModelo").dialog("open");
+    $("#trigger-modal", window.parent.document)[0].click();
   });
 };
 

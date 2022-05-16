@@ -1,10 +1,10 @@
-import * as functions from '../functions.js';
+import * as functions from '../functions/functions.js'
 
 const ModalSelecaoDoc = () => {
   $('body').append(`
     <div id="docModelo" title="Documento modelo - Seleção">
       <p>Selecione abaixo, dentre os documentos constantes na árvore do processo, o modelo para reprodução em lote:</p>
-      <select>${functions.getDocsArvore()}</select>
+      <select></select>
     </div>
   `)
 
@@ -17,6 +17,7 @@ const ModalSelecaoDoc = () => {
     width: 600,
     show: 100,
     modal: true,
+    open: () => functions.getDocsArvore(),
     buttons: [
       {
         text: "Ok",

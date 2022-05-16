@@ -1,4 +1,4 @@
-import * as functions from '../functions.js';
+import * as functions from '../functions/functions.js'
 
 const ModalAnaliseDocModelo = () => {
   $('body').append(`

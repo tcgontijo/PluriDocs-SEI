@@ -1,11 +1,10 @@
-import BotaoAcao from "./components/BotaoAcao.js"
-import ModalSelecaoDoc from "./components/ModalSelecaoDoc.js"
-import ModalAnaliseModelo from "./components/ModalAnaliseModelo.js"
-import ModalSelecaoBaseDados from "./components/ModalSelecaoBaseDados.js"
+import BotaoMock from "../components/BotaoMock.js"
+import ModalSelecaoDoc from "../components/ModalSelecaoDoc.js"
+import ModalAnaliseModelo from "../components/ModalAnaliseModelo.js"
+import ModalSelecaoBaseDados from "../components/ModalSelecaoBaseDados.js"
 
 
-//Botão na área de ações para chamar o serviço
-BotaoAcao(chrome.runtime.getURL("src/img/btn.png"));
+BotaoMock();
 
 //MODAL 01: Seleção do documento modelo na árvore do processo
 ModalSelecaoDoc();
