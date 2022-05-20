@@ -24,8 +24,9 @@ const ModalSelecaoBaseDados = () => {
         disabled: true,
         prepend: `<span class='ui-icon ui-icon-upload'></span>`,
         click: () => {
-          functions.parseCSV($("#inputBD")[0].files[0]);
-          //$(this).dialog("close");
+          functions.CSVAnalysis($("#inputBD")[0].files[0]);
+          $('#analiseCSV').dialog('open');
+          $('#baseDados').dialog("close");
         }
       },
       {

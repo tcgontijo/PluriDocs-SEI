@@ -1,13 +1,13 @@
 import * as functions from '../functions/functions.js'
 
-const ModalAnaliseDocModelo = () => {
+const ModalAnaliseCSV = () => {
   $('body').append(`
-  <div id="analiseDocModelo" title="Documento modelo - Campos dinâmicos">
-  <p>Análise do documento modelo:</p>
+  <div id="analiseCSV" title="Base de dados - Cabeçalhos e registros">
+  <p>Análise da base de dados:</p>
   </div>
   `)
 
-  $('#analiseDocModelo').dialog({
+  $('#analiseCSV').dialog({
     autoOpen: false,
     classes: {
       "ui-dialog": "modalPluri"
@@ -18,19 +18,19 @@ const ModalAnaliseDocModelo = () => {
     show: 200,
     buttons: [
       {
-        id: 'btnConfirmAnalysis',
+        id: 'btnConfirmAnalysisCSV',
         text: "Ok",
         prepend: `<span class='ui-icon ui-icon-circle-b-check'></span>`,
         click: function () {
-          $(this).dialog("close");
-          $("#baseDados").dialog("open");
+          //$(this).dialog("close");
+          //$("#baseDados").dialog("open");
         }
       },
       {
         text: "Voltar",
         prepend: `<span class='ui-icon ui-icon-arrowreturn-1-w'></span>`,
         click: function () {
-          $('#docModelo').dialog('open');
+          $('#baseDados').dialog('open');
           $(this).dialog("close");
         }
       },
@@ -46,4 +46,4 @@ const ModalAnaliseDocModelo = () => {
   });
 }
 
-export default ModalAnaliseDocModelo;
+export default ModalAnaliseCSV;

@@ -17,13 +17,20 @@ const ModalSelecaoDoc = () => {
     width: 600,
     show: 100,
     modal: true,
-    open: () => functions.getDocsArvore(),
+    open: () => {
+      $("#btnSelecaoDoc").prop('disabled', true).addClass('ui-button-disabled ui-state-disabled')
+      functions.getDocsArvore()
+    },
     buttons: [
       {
+        id: 'btnSelecaoDoc',
         text: "Ok",
         prepend: `<span class='ui-icon ui-icon-circle-b-check'></span>`,
         click: function () {
-          //Acessar conteúdo do documento e localizar campos dinâmicos
+          /* Isola o número do documento a partir do nome */
+          const selected = $(this).find('select').val().trim()
+          const nrDoc = selected.substring(selected.lastIndexOf(' '), selected.length).match(/\d+/i)[0];
+          functions.docAnalysis(nrDoc);
           $('#analiseDocModelo').dialog('open');
           $(this).dialog("close");
         }
