@@ -2,6 +2,7 @@ import BotaoMock from "../components/BotaoMock.js"
 import ModalSelecaoDoc from "../components/ModalSelecaoDoc.js"
 import ModalAnaliseModelo from "../components/ModalAnaliseModelo.js"
 import ModalSelecaoBaseDados from "../components/ModalSelecaoBaseDados.js"
+import ModalAnaliseCSV from "../components/ModalAnaliseCSV.js"
 
 
 BotaoMock();
@@ -16,6 +17,7 @@ ModalAnaliseModelo();
 ModalSelecaoBaseDados();
 
 //MODAL 04: Análise da Base de dados indicando os cabeçalhos e a quantidade de registros
+ModalAnaliseCSV();
 
 //MODAL 05: Cruzamento de dados entre os campos dinâmicos do documento modelo e os cabeçalhos da base de dados 
 
