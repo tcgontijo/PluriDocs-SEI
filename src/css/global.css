@@ -1,3 +1,16 @@
+.modalPluri .ui-dialog-buttonset {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modalPluri .ui-dialog-content p {
+    margin-bottom: 10px;
+}
+
+#labelCheckDeleteModel {
+    margin: 10px !important;
+}
+
 .modalPluri {
     font-size: 1.5em !important;
 }
@@ -49,6 +62,42 @@
 #fieldListCSV {
     margin-left: 25px !important;
 }
+
+#tableDataCrossing {
+    width: 100%;
+    text-align: center;
+}
+
+#tableDataCrossing th {
+    font-weight: bold !important;
+}
+
+#tableDataCrossing td:not(#arrow-data-crossing) {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#checkDeleteModel {
+    display: flex;
+    flex-direction: row;
+}
+
+#checkDeleteModel input {
+    width: auto;
+    align-self: center;
+}
+
+#tableDataCrossing {
+    font-size: 15px;
+}
+
+.ui-widget-overlay {
+    opacity: 0.5 !important;
+    filter: Alpha(Opacity=50);
+    background-color: black;
+}
+
+
 
 .spin {
     -webkit-animation-name: spin;

@@ -1,3 +1,4 @@
-a#btn-modal img {
-    margin-left: -2px !important;
+#divArvoreAcoes {
+    display: flex;
+    flex-wrap: wrap;
 }

@@ -1,70 +1,1030 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="pt-br" >
-<head>
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<style type="text/css">
-p.Assunto_Negrito {font-weight:bold;font-size:11pt;font-family:Calibri;text-align:justify;word-wrap:normal;text-indent:0;margin:0;} p.Cabeçalho_Rodapé {font-size:11pt;font-family:Calibri;text-indent:0;text-align:center;word-wrap:normal;margin:0;color:#000099;} p.Cargo_Signatário {font-size:11pt;font-family:Calibri;text-align:center;word-wrap:normal;margin:6pt;} p.Citacao {font-size:12pt;font-family:Calibri;word-wrap:normal;margin:4pt 0 4pt 160px;text-align:justify;} p.Corpo_do_Texto {font-size:11pt;font-family:Calibri;text-indent:25mm;text-align:justify;word-wrap:normal;margin:0 0 0 6pt;} p.Corpo_do_Texto_Tópico {font-size:11pt;font-family:Calibri;text-align:justify;word-wrap:normal;margin:0;} p.Etiquetas {font-size:32pt;font-family:Calibri;text-align:center;word-wrap:normal;margin:10pt;} p.Etiquetas2 {font-size:30pt;font-family:arial;text-align:justify;word-wrap:normal;text-indent:0;margin:6pt;} p.Fonte 6 {font-size:17pt;font-family:arial;text-align:justify;word-wrap:normal;text-indent:0;margin:6pt;} p.Item_Alinea_Letra {font-size:12pt;font-family:Calibri;text-indent:0mm;text-align:justify;word-wrap:normal;margin:6pt 6pt 6pt 120px;counter-increment:letra_minuscula;} p.Item_Alinea_Letra:before {content:counter(letra_minuscula, lower-latin) ") ";display:inline-block;width:5mm;font-weight:normal;} p.Item_Inciso_Romano {font-size:12pt;font-family:Calibri;text-align:justify;word-wrap:normal;text-indent:0mm;margin:6pt 6pt 6pt 120px;counter-increment:romano_maiusculo;} p.Item_Inciso_Romano:before {content:counter(romano_maiusculo, upper-roman) " - ";display:inline-block;width:15mm;font-weight:normal;} p.Item_Nivel1 {text-transform:uppercase;font-weight:bold;background-color:#e6e6e6;font-size:12pt;font-family:Calibri;text-align:justify;word-wrap:normal;text-indent:0;margin:6pt;counter-increment:item-n1;counter-reset:item-n2 item-n3 item-n4 item-n5 item-n6 romano_maiusculo letra_minuscula;} p.Item_Nivel1:before {content:counter(item-n1) ".";display:inline-block;width:25mm;font-weight:normal;} p.Item_Nivel1_SemNumeração {text-transform:uppercase;font-weight:bold;background-color:#e6e6e6;font-size:12pt;font-family:Calibri;text-align:justify;word-wrap:normal;text-indent:0;margin:6pt;} p.Item_Nivel2 {font-size:12pt;font-family:Calibri;text-indent:0mm;text-align:justify;word-wrap:normal;margin:6pt;counter-increment:item-n2;counter-reset:item-n3 item-n4 item-n5 item-n6 romano_maiusculo letra_minuscula;} p.Item_Nivel2:before {content:counter(item-n1) "." counter(item-n2) ".";display:inline-block;width:25mm;font-weight:normal;} p.Item_Nivel3 {font-size:12pt;font-family:Calibri;text-indent:0mm;text-align:justify;word-wrap:normal;margin:6pt;counter-increment:item-n3;counter-reset:item-n4 item-n5 item-n6 romano_maiusculo letra_minuscula;} p.Item_Nivel3:before {content:counter(item-n1) "." counter(item-n2) "." counter(item-n3) ".";display:inline-block;width:25mm;font-weight:normal;} p.Item_Nivel4 {font-size:12pt;font-family:Calibri;text-indent:0mm;text-align:justify;word-wrap:normal;margin:6pt;counter-increment:item-n4;counter-reset:item-n5 item-n6 romano_maiusculo letra_minuscula;} p.Item_Nivel4:before {content:counter(item-n1) "." counter(item-n2) "." counter(item-n3) "."  counter(item-n4) ".";display:inline-block;width:25mm;font-weight:normal;} p.Item_Nivel5 {font-size:12pt;font-family:Calibri;text-indent:0mm;text-align:justify;word-wrap:normal;margin:6pt;counter-increment:item-n5;counter-reset:item-n6 romano_maiusculo letra_minuscula;} p.Item_Nivel5:before {content:counter(item-n1) "." counter(item-n2) "." counter(item-n3) "."  counter(item-n4) "." counter(item-n5) ".";display:inline-block;width:25mm;font-weight:normal;} p.Item_Nivel6 {font-size:12pt;font-family:Calibri;text-indent:0mm;text-align:justify;word-wrap:normal;margin:6pt;counter-increment:item-n6;counter-reset:romano_maiusculo letra_minuscula;} p.Item_Nivel6:before {content:counter(item-n1) "." counter(item-n2) "." counter(item-n3) "."  counter(item-n4) "." counter(item-n5) "." counter(item-n6) ".";display:inline-block;width:25mm;font-weight:normal;} p.Local_e_Data_Direita {font-size:11pt;font-family:Calibri;text-align:right;word-wrap:normal;margin:6pt;} p.Local_e_Data_Esquerda {font-size:11pt;font-family:Calibri;text-align:left;word-wrap:normal;margin:6pt;} p.Nome_Signatário {font-weight:bold;font-size:11pt;font-family:Calibri;text-align:center;word-wrap:normal;margin:6pt;} p.Novo_cabecalho {font-size:14pt;font-family:Calibri;text-align:center;word-wrap:normal;margin:6pt;} p.Novo_ementa {font-size:12pt;font-family:Calibri;word-wrap:normal;margin:4pt 0 4pt 500px;text-align:justify;} p.Paragrafo_Numerado_Nivel1 {font-size:12pt;font-family:Calibri;text-align:justify;word-wrap:normal;text-indent:0mm;margin:6pt;counter-increment:paragrafo-n1;counter-reset:paragrafo-n2 paragrafo-n3 paragrafo-n4 romano_maiusculo letra_minuscula;} p.Paragrafo_Numerado_Nivel1:before {content:counter(paragrafo-n1) ".";display:inline-block;width:25mm;font-weight:normal;} p.Paragrafo_Numerado_Nivel2 {font-size:12pt;font-family:Calibri;text-indent:0mm;text-align:justify;word-wrap:normal;margin:6pt;counter-increment:paragrafo-n2;counter-reset:paragrafo-n3 paragrafo-n4 romano_maiusculo letra_minuscula;} p.Paragrafo_Numerado_Nivel2:before {content:counter(paragrafo-n1) "." counter(paragrafo-n2) ".";display:inline-block;width:25mm;font-weight:normal;} p.Paragrafo_Numerado_Nivel3 {font-size:12pt;font-family:Calibri;text-indent:0mm;text-align:justify;word-wrap:normal;margin:6pt;counter-increment:paragrafo-n3;counter-reset:paragrafo-n4 romano_maiusculo letra_minuscula;} p.Paragrafo_Numerado_Nivel3:before {content:counter(paragrafo-n1) "." counter(paragrafo-n2) "." counter(paragrafo-n3) ".";display:inline-block;width:25mm;font-weight:normal;} p.Paragrafo_Numerado_Nivel4 {font-size:12pt;font-family:Calibri;text-indent:0mm;text-align:justify;word-wrap:normal;margin:6pt;counter-increment:paragrafo-n4;counter-reset:romano_maiusculo letra_minuscula;} p.Paragrafo_Numerado_Nivel4:before {content:counter(paragrafo-n1) "." counter(paragrafo-n2) "." counter(paragrafo-n3) "." counter(paragrafo-n4) ".";display:inline-block;width:25mm;font-weight:normal;} p.Tabela_Texto_8 {font-size:8pt;font-family:Calibri;text-align:left;word-wrap:normal;margin:0 3pt 0 3pt;} p.Tabela_Texto_Alinhado_Direita {font-size:11pt;font-family:Calibri;text-align:right;word-wrap:normal;margin:0 3pt 0 3pt;} p.Tabela_Texto_Alinhado_Esquerda {font-size:11pt;font-family:Calibri;text-align:left;word-wrap:normal;margin:0 3pt 0 3pt;} p.Tabela_Texto_Centralizado {font-size:11pt;font-family:Calibri;text-align:center;word-wrap:normal;margin:0 3pt 0;} p.Texto_Alinhado_Direita {font-size:12pt;font-family:Calibri;text-align:right;word-wrap:normal;margin:6pt;} p.Texto_Alinhado_Esquerda {font-size:12pt;font-family:Calibri;text-align:left;word-wrap:normal;margin:6pt;} p.Texto_Alinhado_Esquerda_Espacamento_Simples {font-size:12pt;font-family:Calibri;text-align:left;word-wrap:normal;margin:0;} p.Texto_Alinhado_Esquerda_Espacamento_Simples_Maiusc {font-size:12pt;font-family:Calibri;text-align:left;text-transform:uppercase;word-wrap:normal;margin:0;} p.Texto_Centralizado {font-size:12pt;font-family:Calibri;text-align:center;word-wrap:normal;margin:6pt;} p.Texto_Centralizado_Espaçamento_Simples {font-size:12pt;font-family:Calibri;text-align:center;word-wrap:normal;margin:0;} p.Texto_Centralizado_Maiusculas {font-size:13pt;font-family:Calibri;text-align:center;text-transform:uppercase;word-wrap:normal;} p.Texto_Centralizado_Maiusculas_Negrito {font-weight:bold;font-size:13pt;font-family:Calibri;text-align:center;text-transform:uppercase;word-wrap:normal;} p.Texto_Espaco_Duplo_Recuo_Primeira_Linha_Negrito {letter-spacing:0.2em;font-weight:bold;font-size:12pt;font-family:Calibri;text-indent:25mm;text-align:justify;word-wrap:normal;margin:6pt;} p.Texto_Espaço_Duplo_Recuo_Primeira_Linha {letter-spacing:0.2em;font-weight:font-size;font-family:Calibri;text-indent:25mm;text-align:justify;word-wrap:normal;margin:6pt;} p.Texto_Fonte_Média {font-size:14pt;font-family:Calibri;text-align:left;word-wrap:normal;margin:0;} p.Texto_Fonte_Pequena {font-size:8pt;font-family:Calibri;text-align:left;word-wrap:normal;margin:0;} p.Texto_Fundo_Cinza_Maiusculas_Negrito {text-transform:uppercase;font-weight:bold;background-color:#e6e6e6;font-size:12pt;font-family:Calibri;text-align:justify;word-wrap:normal;text-indent:0;margin:6pt;} p.Texto_Fundo_Cinza_Negrito {font-weight:bold;background-color:#e6e6e6;font-size:12pt;font-family:Calibri;text-align:justify;word-wrap:normal;text-indent:0;margin:6pt;} p.Texto_Justificado {font-size:12pt;font-family:Calibri;text-align:justify;word-wrap:normal;text-indent:0;margin:6pt;} p.Texto_Justificado_Maiusculas {font-size:12pt;font-family:Calibri;text-align:justify;word-wrap:normal;text-indent:0;margin:6pt;text-transform:uppercase;} p.Texto_Justificado_Recuo_Primeira_Linha {font-size:12pt;font-family:Calibri;text-indent:25mm;text-align:justify;word-wrap:normal;margin:6pt;} p.Texto_Justificado_Recuo_Primeira_Linha_Esp_Simples {font-size:12pt;font-family:Calibri;text-indent:25mm;text-align:justify;word-wrap:normal;margin:0 0 0 6pt;} p.Texto_alinhado_esquerda_11 {font-size:11pt;font-family:Calibri;text-align:left;word-wrap:normal;margin:6pt;} p.Texto_alinhado_esquerda_13 {font-size:13pt;font-family:Calibri;text-align:left;word-wrap:normal;margin:6pt;} p.Tipo_Documento {font-size:11pt;font-family:Calibri;text-align:left;word-wrap:normal;margin:6pt;} p.Titulo_certificado {font-size:22pt;font-family:arial;text-align:justify;word-wrap:normal;text-indent:0;margin:6pt;} p.Título_Centralizado_Maiúsculo {font-weight:bold;font-size:11pt;font-family:Calibri;text-align:center;word-wrap:normal;text-indent:0;margin:0;text-transform:uppercase;} p.Vocativo {font-size:11pt;font-family:Calibri;text-align:left;word-wrap:normal;margin:0;} p.estilo_deliberacao {font-size:11pt;font-family:arial;text-align:justify;word-wrap:normal;text-indent:0;margin:0pt;} p.novoestilo {font-size:12pt;font-family:Calibri;text-align:justify;word-wrap:normal;text-indent:0;margin:6pt;} p.novoestilo1 {font-size:12pt;font-family:Calibri;text-align:justify;word-wrap:normal;text-indent:0;margin:6pt;} 
-</style><title>SEI/GOVMG - 46536610 - Despacho</title>
+<head >
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="robots" content="noindex" />
+<title>SEI - Gerar Documento</title>
+<link href="/infra_css/infra-global-esquema.css?3.1.7-1.532.3" rel="stylesheet" type="text/css" media="all" />
+<link href="/infra_css/infra-global-esquema-2.css?3.1.7-1.532.3" rel="stylesheet" type="text/css" media="all" />
+<link href="/infra_css/esquemas/azul_celeste/infra-esquema.css?3.1.7-1.532.3" rel="stylesheet" type="text/css" media="all" />
+<link href="/infra_css/esquemas/azul_celeste/infra-esquema-2.css?3.1.7-1.532.3" rel="stylesheet" type="text/css" media="all" />
+<link href="/infra_css/infra-tooltip.css?3.1.7-1.532.3" rel="stylesheet" type="text/css" media="all" />
+<link href="/infra_css/infra-barra-progresso.css?3.1.7-1.532.3" rel="stylesheet" type="text/css" media="all" />
+<link href="css/infra-esquema-local.css?3.1.7-1.532.3" rel="stylesheet" type="text/css" media="all" />
+<link href="/infra_css/infra-impressao-global.css?3.1.7-1.532.3" rel="stylesheet" type="text/css" media="print" />
+<link href="/infra_css/infra-ajax.css?3.1.7-1.532.3" rel="stylesheet" type="text/css" media="all" />
+<link href="/infra_js/calendario/infra-calendario.css?3.1.7-1.532.3" rel="stylesheet" type="text/css" media="all" />
+<link href="/infra_js/arvore/infra-arvore.css?3.1.7-1.532.3" rel="stylesheet" type="text/css" media="all" />
+<link href="/infra_js/mapa/infra-mapa.css?3.1.7-1.532.3" rel="stylesheet" type="text/css" media="all" />
+<link href="/infra_js/jquery/jquery-ui-1.11.1/jquery-ui.min.css?1.11.1" rel="stylesheet" type="text/css" media="all" />
+<link href="/infra_js/jquery/jquery-ui-1.11.1/jquery-ui.structure.min.css?1.11.1" rel="stylesheet" type="text/css" media="all" />
+<link href="/infra_js/jquery/jquery-ui-1.11.1/jquery-ui.theme.min.css?1.11.1" rel="stylesheet" type="text/css" media="all" />
+<link href="/infra_js/multiple-select/multiple-select.css?3.1.7-1.532.3" rel="stylesheet" type="text/css" media="all" />
+<link href="/infra_js/modal/jquery.modalLink-1.0.0.css?3.1.7-1.532.3" rel="stylesheet" type="text/css" media="all" />
+<style type="text/css" >
+<!--/*--><![CDATA[/*><!--*/
+
+  #divSerieTitulo {display:block;}
+
+  #lblDescricao {position:absolute;left:0;top:0;width:50%;}
+  #txtDescricao {position:absolute;left:0;top:40%;width:89.5%;}
+
+  #divUnidadesReabertura {display:none}
+  #lblUnidadesReabertura {position:absolute;left:0;top:0;}
+  #selUnidadesReabertura {position:absolute;left:0;top:25%;width:90%;}
+  #divOpcoesUnidadesReabertura {position:absolute;left:91%;top:25%;}
+
+  #divSerieDataElaboracao {display:none;}
+  #lblSerie {position:absolute;left:0;top:0;}
+  #selSerie {position:absolute;left:0;top:40%;width:50%;}
+
+  #lblDataElaboracao {position:absolute;left:53%;top:0;}
+  #txtDataElaboracao {position:absolute;left:53%;top:40%;width:13%;}
+  #imgDataElaboracao {position:absolute;left:67%;top:45%;}
+
+  #divTextoInicial {display:block}
+  #fldTextoInicial {position:absolute;left:0;top:0;height:85%;width:88%;}
+
+  #divOptProtocoloDocumentoTextoBase {position:absolute;left:13%;top:22%;}
+  #txtProtocoloDocumentoTextoBase {position:absolute;left:40%;top:22%;width:15%}
+  #lblOuModeloFavorito {position:absolute;left:57%;top:23%;}
+  #btnEscolherDocumentoTextoBase {position:absolute;left:60.5%;top:23%;}
+
+  #divOptTextoPadrao {position:absolute;left:13%;top:47%;}
+  #selTextoPadrao {position:absolute;left:40%;top:47%;width:55%}
+
+  #divOptNenhum   {position:absolute;left:13%;top:72%;}
+
+  #divNumero {display:none;}
+  #lblNumero {position:absolute;left:0;top:0;}
+  #txtNumero {position:absolute;left:0;top:40%;width:50%;}
+
+  #divFormato {display:none;;}
+  #fldFormato {position:absolute;left:0%;top:0%;height:80%;width:48.5%;}
+  #ancAjudaFormato > img {height:16px;width:16px;padding:.1em 0;vertical-align:middle;}
+  #divOptNato {position:absolute;left:15%;top:15%}
+  #divOptDigitalizado {position:absolute;left:15%;top:50%}
+
+  #lblTipoConferencia {position:absolute;left:53%;top:19%;width:37%;display:none;}
+  #selTipoConferencia {position:absolute;left:53%;top:40%;width:37%;display:none;}
+
+  #divDescricao {display:block;}
+
+  #lblRemetente {position:absolute;left:0;top:0;}
+  #txtRemetente {position:absolute;left:0;top:40%;width:89.5%;}
+  #divOpcoesRemetente {position:absolute;left:91%;top:40%;}
+
+  #divInteressados {display:block}
+  #lblInteressados {position:absolute;left:0;top:0;}
+  #txtInteressado {position:absolute;left:0;top:18%;width:50%;}
+  #selInteressados {position:absolute;left:0;top:38%;width:90%;height:56%;}
+  #divOpcoesInteressados {position:absolute;left:91%;top:38%;}
+
+  #divDestinatarios {display:block}
+  #lblDestinatarios {position:absolute;left:0;top:0;}
+  #txtDestinatario {position:absolute;left:0;top:18%;width:50%;}
+  #selDestinatarios {position:absolute;left:0;top:38%;width:90%;height:56%;}
+  #divOpcoesDestinatarios {position:absolute;left:91%;top:38%;}
+
+  #divAssuntos {display:block}
+  #lblAssuntos {position:absolute;left:0;top:0;}
+  #txtAssunto {position:absolute;left:0;top:18%;width:50%;}
+  #selAssuntos {position:absolute;left:0;top:38%;width:90%;height:56%;}
+  #divOpcoesAssuntos {position:absolute;left:91%;top:38%;}
+
+  #lblObservacoes {position:absolute;left:0;top:0;width:50%;}
+  #txaObservacoes {position:absolute;left:0;top:25%;width:89.5%;}
+
+  /* #divObservacoesOutras {display:none;} */
+
+#divNivelAcesso {height:7em;}
+#fldNivelAcesso {position:absolute;left:0%;top:0%;height:80%;width:88%;}
+#divOptSigiloso  {position:absolute;left:13%;top:25%;width:30%;}
+#selGrauSigilo {display:none}
+#divOptRestrito {position:absolute;left:43%;top:25%;}
+#divOptPublico   {position:absolute;left:73%;top:25%;}
+#lblHipoteseLegal {position:absolute;left:5%;width:90%;top:;display:none}
+#selHipoteseLegal {position:absolute;left:5%;width:90%;top:;display:none}
+  #frmAnexos {margin: .5em 0 0 0;border:0;padding:0;display:none;}
+  #divArquivo {height:5em;}
+  #lblArquivo {position:absolute;left:0;top:0;width:70%;}
+  #filArquivo {position:absolute;left:0;top:40%;width:70%;}
+  #imgAdicionarArquivo {position:absolute;left:50%;top:40%;}
+
+
+  #divOptProtocoloDocumentoTextoBase {top:15%;}
+  #txtProtocoloDocumentoTextoBase {top:15%;}
+  #lblOuModeloFavorito {top:16%;}
+  #btnEscolherDocumentoTextoBase {top:16%;}
+
+  #divOptTextoPadrao {top:40%;}
+  #selTextoPadrao {top:40%;}
+
+  #divOptNenhum {top:65%;}
+
+/*]]>*/-->
+</style>
+<script type="text/javascript">var INFRA_PATH_IMAGENS='/infra_css/imagens',INFRA_PATH_JS='/infra_js',INFRA_PATH_CSS='/infra_css';</script>
+
+<script type="text/javascript" charset="utf-8" src="/infra_js/jquery/jquery-1.12.4.min.js?1.12.4"></script>
+<script type="text/javascript" charset="utf-8" src="/infra_js/jquery/jquery-ui-1.11.1/jquery-ui.min.js?1.11.1"></script>
+<script type="text/javascript" charset="utf-8" src="/infra_js/multiple-select/jquery.multiple.select.js?3.1.7-1.532.3"></script>
+<script type="text/javascript" charset="utf-8" src="/infra_js/ddslick/jquery.ddslick.min.js?3.1.7-1.532.3"></script>
+<script type="text/javascript" charset="utf-8" src="/infra_js/modal/jquery.modalLink-1.0.0.js?3.1.7-1.532.3"></script>
+
+
+<script type="text/javascript" charset="utf-8" src="/infra_js/smartmenu/jquery.smartmenus.js"></script>
+<script type="text/javascript" charset="utf-8" src="/infra_js/smartmenu/addons/keyboard/jquery.smartmenus.keyboard.js"></script>
+			
+<script type="text/javascript" charset="iso-8859-1" src="/infra_js/InfraUtil.js?3.1.7-1.532.3"></script>
+<script type="text/javascript" charset="iso-8859-1" src="/infra_js/InfraCookie.js?3.1.7-1.532.3"></script>
+<script type="text/javascript" charset="iso-8859-1" src="/infra_js/InfraUpload.js?3.1.7-1.532.3"></script>
+<script type="text/javascript" charset="iso-8859-1" src="/infra_js/InfraMenu.js?3.1.7-1.532.3"></script>
+<script type="text/javascript" charset="iso-8859-1" src="/infra_js/InfraBotaoMenu.js?3.1.7-1.532.3"></script>
+<script type="text/javascript" charset="iso-8859-1" src="/infra_js/InfraAcaoMenu.js?3.1.7-1.532.3"></script>
+<script type="text/javascript" charset="iso-8859-1" src="/infra_js/InfraTabelaDinamica.js?3.1.7-1.532.3"></script>
+<script type="text/javascript" charset="iso-8859-1" src="/infra_js/InfraLupas.js?3.1.7-1.532.3"></script>
+<script type="text/javascript" charset="iso-8859-1" src="/infra_js/InfraSelectEditavel.js?3.1.7-1.532.3"></script>
+<script type="text/javascript" charset="iso-8859-1" src="/infra_js/InfraAjax.js?3.1.7-1.532.3"></script>
+<script type="text/javascript" charset="iso-8859-1" src="/infra_js/InfraTooltip.js?3.1.7-1.532.3"></script>
+<script type="text/javascript" charset="iso-8859-1" src="/infra_js/calendario/InfraCalendario.js?3.1.7-1.532.3"></script>
+<script type="text/javascript" charset="iso-8859-1" src="/infra_js/arvore/InfraArvore.js?3.1.7-1.532.3"></script>
+<script type="text/javascript">
+$(function() {
+	$('#main-menu').smartmenus({
+    subMenusSubOffsetX: 1,
+    subMenusSubOffsetY: -8
+  });
+
+  //MENU CTRL+ALT+F9 
+  $('#main-menu').smartmenus('keyboardSetHotkey', 120, ['ctrlKey', 'altKey']);
+});
+</script>
+<script type="text/javascript" charset="iso-8859-1" src="js/sei.js?3.1.7-1.532.3"></script>
+
+<script type="text/javascript" charset="iso-8859-1" >
+<!--//--><![CDATA[//><!--
+
+
+  var objLupaUnidadesReabertura = null;
+  var objTabelaAnexos = null;
+  var objAjaxTextoPadrao = null;
+  var objLupaDocumentoTextoBase = null;
+  var objAutoCompletarAssuntoRI1223 = null;
+  var objLupaAssuntos = null;
+  var objLupaInteressados = null;
+  var objAutoCompletarInteressadoRI1225 = null;
+  var objLupaRemetente = null;
+  var objAutoCompletarRemetenteRI1226 = null;
+  var objLupaDestinatarios = null;
+  var objAutoCompletarDestinatarioRI1226 = null;
+  var objContatoCadastroAutomatico = null;
+  var objUpload = null;
+
+
+  var objAjaxHipoteseLegal = null;
+var objAjaxTipoProcedimentoSugestoes = null;
+
+function alterarNivelAcesso(){
+  infraSelectSelecionarItem('selGrauSigilo','null');
+  infraSelectSelecionarItem('selHipoteseLegal','null');
+
+  if (document.getElementById('optPublico').checked){
+    document.getElementById('divNivelAcesso').style.height = '7em';
+    document.getElementById('divOptSigiloso').style.top = '25%';
+    document.getElementById('divOptRestrito').style.top = '25%';
+    document.getElementById('divOptPublico').style.top = '25%';
+    document.getElementById('lblHipoteseLegal').style.display = 'none';
+    document.getElementById('selHipoteseLegal').style.display = 'none';
+    document.getElementById('selGrauSigilo').style.display = 'none';
+  }else if (document.getElementById('optRestrito').checked || document.getElementById('optSigiloso').checked){
+    document.getElementById('divNivelAcesso').style.height = '13em';
+    document.getElementById('divOptSigiloso').style.top = '14%';
+    document.getElementById('divOptRestrito').style.top = '14%';
+    document.getElementById('divOptPublico').style.top = '14%';
+    document.getElementById('lblHipoteseLegal').style.top = '46%';
+    document.getElementById('selHipoteseLegal').style.top = '65%';
+    document.getElementById('lblHipoteseLegal').style.display = 'block';
+    document.getElementById('selHipoteseLegal').style.display = 'block';
+
+    objAjaxTipoProcedimentoSugestoes.executar();
+  }
+}
+
+
+  var arrAssuntosNegados = Array();
+
+  var arrInteressadosNegados = Array();
+
+  var arrDestinatariosNegados = Array();
+
+  function inicializar(){
+
+    objLupaUnidadesReabertura = new infraLupaSelect('selUnidadesReabertura','hdnUnidadesReabertura','controlador.php?acao=unidade_selecionar_reabertura_processo&tipo_selecao=2&id_object=objLupaUnidadesReabertura&id_procedimento=53828072&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=e3555bf49fcb0401d5f7f32203fdaa28c11b09f472963366dbffb881dd9e1921');
+
+    if ('documento_gerar'=='documento_gerar'){
+      objAjaxTextoPadrao = new infraAjaxMontarSelect('selTextoPadrao','controlador_ajax.php?acao_ajax=texto_padrao_editor_listar&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=489ac5b7d7b42146ae993b364894cbbab0b9aebc6ee19bbaca95c937773bc82d');
+      configurarTextoInicial();
+      objLupaDocumentoTextoBase = new infraLupaText('txtProtocoloDocumentoTextoBase','hdnIdDocumentoTextoBase','controlador.php?acao=documento_modelo_selecionar&tipo_selecao=1&id_object=objLupaDocumentoTextoBase&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=5d50d8e2e304eb450ffa0035ebc3783d6cf26e2987ec4574935338bec3ab40a4');
+    }
+
+    if ('documento_gerar'=='documento_gerar' || 'documento_gerar'=='documento_alterar' || 'documento_gerar'=='publicacao_gerar_relacionada' ||	'documento_gerar'=='documento_consultar'){
+      document.getElementById('divRemetente').style.display='none';
+      document.getElementById('divDestinatarios').style.display='';
+    }else{
+      document.getElementById('divRemetente').style.display='';
+      document.getElementById('divDestinatarios').style.display='none';
+    }
+
+    //Monta tabela de anexos
+    objTabelaAnexos = new infraTabelaDinamica('tblAnexos','hdnAnexos',false,false);
+    objTabelaAnexos.gerarEfeitoTabela=true;
+
+    //Monta ações de download
+    
+    //Monta ações para remover anexos
+    
+    //Se consultando desabilita campos e não monta ações para remover anexos
+    if ('documento_gerar'=='documento_consultar' || 'documento_gerar'=='documento_consultar_recebido'){
+      infraDesabilitarCamposDiv(document.getElementById('divSerieDataElaboracao'));
+      infraDesabilitarCamposDiv(document.getElementById('divDescricao'));
+      infraDesabilitarCamposDiv(document.getElementById('divNumero'));
+      infraDesabilitarCamposDiv(document.getElementById('divFormato'));
+      document.getElementById('ancAjudaFormato').style.display = 'none';
+      infraDesabilitarCamposDiv(document.getElementById('divAssuntos'));
+      infraDesabilitarCamposDiv(document.getElementById('divRemetente'));
+      infraDesabilitarCamposDiv(document.getElementById('divInteressados'));
+      infraDesabilitarCamposDiv(document.getElementById('divDestinatarios'));
+      infraDesabilitarCamposDiv(document.getElementById('divObservacoes'));
+      infraDesabilitarCamposDiv(document.getElementById('divNivelAcesso'));
+      document.getElementById('divArquivo').style.display = 'none';
+      return;
+    }
+
+    objAutoCompletarAssuntoRI1223 = new infraAjaxAutoCompletar('hdnIdAssunto','txtAssunto','controlador_ajax.php?acao_ajax=assunto_auto_completar_RI1223&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=a5d3f7b3e8b95f17b9f20f63e3881d181f5e0d5a52f5ca42cb76ed7341fe9614');
+    //objAutoCompletarAssuntoRI1223.maiusculas = true;
+    //objAutoCompletarAssuntoRI1223.mostrarAviso = true;
+    //objAutoCompletarAssuntoRI1223.tempoAviso = 1000;
+    //objAutoCompletarAssuntoRI1223.tamanhoMinimo = 3;
+    objAutoCompletarAssuntoRI1223.limparCampo = true;
+    //objAutoCompletarAssuntoRI1223.bolExecucaoAutomatica = false;
+
+    objAutoCompletarAssuntoRI1223.prepararExecucao = function(){
+      return 'palavras_pesquisa='+document.getElementById('txtAssunto').value;
+    };
+
+
+    objAutoCompletarAssuntoRI1223.processarResultado = function(id,descricao,complemento){
+      if (id!=''){
+        objLupaAssuntos.adicionar(id,descricao,document.getElementById('txtAssunto'));
+      }
+    };
+
+
+    //Inicializa campos hidden com valores das listas
+    objLupaAssuntos = new infraLupaSelect('selAssuntos','hdnAssuntos','controlador.php?acao=assunto_selecionar&tipo_selecao=2&id_object=objLupaAssuntos&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=d2f3980ce3c8d2aeb15b1a994575c07f024f347e6177861c59a9cc088c6fe453');
+
+    
+    objLupaAssuntos.processarAlteracao = function (pos, texto, valor){
+      seiConsultarAssunto(valor, 'selAssuntos','frmDocumentoCadastro','controlador.php?acao=assunto_consultar&acao_origem=documento_gerar&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=e72a47e7200044b3dd9715f0c4ca8619c30d67125cc9cd5a01c6aa44201f4a1f');
+    }
+
+
+    document.getElementById('selAssuntos').ondblclick = function(e){
+      objLupaAssuntos.alterar();
+    };
+
+    objAutoCompletarInteressadoRI1225 = new infraAjaxAutoCompletar('hdnIdInteressado','txtInteressado','controlador_ajax.php?acao_ajax=contato_auto_completar_contexto_RI1225&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=02df83af69d44a8425fb628de49d1601fa88a71be5fcc1dcb82f197f83e5f321');
+    //objAutoCompletarInteressadoRI1225.maiusculas = true;
+    //objAutoCompletarInteressadoRI1225.mostrarAviso = true;
+    //objAutoCompletarInteressadoRI1225.tempoAviso = 1000;
+    //objAutoCompletarInteressadoRI1225.tamanhoMinimo = 3;
+    objAutoCompletarInteressadoRI1225.limparCampo = false;
+    //objAutoCompletarInteressadoRI1225.bolExecucaoAutomatica = false;
+
+    objAutoCompletarInteressadoRI1225.prepararExecucao = function(){
+      return 'palavras_pesquisa='+encodeURIComponent(document.getElementById('txtInteressado').value);
+    };
+
+    objAutoCompletarInteressadoRI1225.processarResultado = function(id,descricao,complemento){
+      if (id!=''){
+        objLupaInteressados.adicionar(id,descricao,document.getElementById('txtInteressado'));
+      }
+    };
+
+    infraAdicionarEvento(document.getElementById('txtInteressado'),'keyup',tratarEnterInteressado);
+
+    objLupaInteressados = new infraLupaSelect('selInteressados','hdnInteressados','controlador.php?acao=contato_selecionar&tipo_selecao=2&id_object=objLupaInteressados&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=6e4668ad776cdd710da2219c13895bb349ead235ca848e823e7a63498a240468');
+
+    objLupaInteressados.processarAlteracao = function (pos, texto, valor){
+      seiAlterarContato(valor, 'selInteressados','frmDocumentoCadastro','controlador.php?acao=contato_alterar&acao_origem=documento_gerar&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=a685fda0cc4b868eb8d383a5e65f5dc6ad95961b3380da1fde1eb2e63c9c09bb');
+    }
+
+    objLupaInteressados.processarRemocao = function(itens){
+      for(var i=0;i < itens.length;i++){
+        for(var j=0;j < arrInteressadosNegados.length; j++){
+          if (itens[i].value == arrInteressadosNegados[j].id_contato) {
+            alert('Interessado \"' + itens[i].text + '\" não pode ser removido porque foi adicionado pela unidade ' + arrInteressadosNegados[j].sigla_unidade + '.');
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    document.getElementById('selInteressados').ondblclick = function(e){
+      objLupaInteressados.alterar();
+    };
+
+    objLupaRemetente = new infraLupaText('txtRemetente','hdnIdRemetente','controlador.php?acao=contato_selecionar&tipo_selecao=1&id_object=objLupaRemetente&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=138744bc3fde50dd49407fe3ce319a6ad97fe3ee5e190884413de57ac7e7d3d8');
+
+    objLupaRemetente.finalizarSelecao = function(){
+      objAutoCompletarRemetenteRI1226.selecionar(document.getElementById('hdnIdRemetente').value,document.getElementById('txtRemetente').value);
+    }
+
+    objLupaRemetente.processarAlteracao = function (id, texto){
+      seiAlterarContato(id, 'txtRemetente', 'frmDocumentoCadastro','controlador.php?acao=contato_alterar&acao_origem=documento_gerar&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=a685fda0cc4b868eb8d383a5e65f5dc6ad95961b3380da1fde1eb2e63c9c09bb');
+    }
+
+    objAutoCompletarRemetenteRI1226 = new infraAjaxAutoCompletar('hdnIdRemetente','txtRemetente','controlador_ajax.php?acao_ajax=contato_auto_completar_contexto_RI1225&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=02df83af69d44a8425fb628de49d1601fa88a71be5fcc1dcb82f197f83e5f321');
+    //objAutoCompletarRemetenteRI1226.maiusculas = true;
+    //objAutoCompletarRemetenteRI1226.mostrarAviso = true;
+    //objAutoCompletarRemetenteRI1226.tempoAviso = 1000;
+    //objAutoCompletarRemetenteRI1226.tamanhoMinimo = 3;
+    objAutoCompletarRemetenteRI1226.limparCampo = false;
+    //objAutoCompletarRemetenteRI1226.bolExecucaoAutomatica = false;
+
+    objAutoCompletarRemetenteRI1226.prepararExecucao = function(){
+      return 'palavras_pesquisa='+encodeURIComponent(document.getElementById('txtRemetente').value);
+    };
+
+    objAutoCompletarRemetenteRI1226.processarResultado = function(id,descricao,complemento){
+      if (id!=''){
+        document.getElementById('hdnIdRemetente').value = id;
+        document.getElementById('txtRemetente').value = descricao;
+      }
+    }
+    objAutoCompletarRemetenteRI1226.selecionar('','');
+
+    infraAdicionarEvento(document.getElementById('txtRemetente'),'keyup',tratarEnterRemetente);
+
+    objAutoCompletarDestinatarioRI1226 = new infraAjaxAutoCompletar('hdnIdDestinatario','txtDestinatario','controlador_ajax.php?acao_ajax=contato_auto_completar_contexto_RI1225&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=02df83af69d44a8425fb628de49d1601fa88a71be5fcc1dcb82f197f83e5f321');
+    //objAutoCompletarDestinatarioRI1226.maiusculas = true;
+    //objAutoCompletarDestinatarioRI1226.mostrarAviso = true;
+    //objAutoCompletarDestinatarioRI1226.tempoAviso = 1000;
+    //objAutoCompletarDestinatarioRI1226.tamanhoMinimo = 3;
+    objAutoCompletarDestinatarioRI1226.limparCampo = false;
+    //objAutoCompletarDestinatarioRI1226.permitirSelecaoGrupo = true;
+    //objAutoCompletarDestinatarioRI1226.bolExecucaoAutomatica = false;
+
+    objAutoCompletarDestinatarioRI1226.prepararExecucao = function(){
+      return 'palavras_pesquisa='+encodeURIComponent(document.getElementById('txtDestinatario').value);
+    };
+
+
+    objAutoCompletarDestinatarioRI1226.processarResultado = function(id,descricao,complemento){
+      if (id!=''){
+        objLupaDestinatarios.adicionar(id,descricao,document.getElementById('txtDestinatario'));
+      }
+    };
+
+    infraAdicionarEvento(document.getElementById('txtDestinatario'),'keyup',tratarEnterDestinatario);
+
+    objLupaDestinatarios = new infraLupaSelect('selDestinatarios','hdnDestinatarios','controlador.php?acao=contato_selecionar&tipo_selecao=2&id_object=objLupaDestinatarios&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=01638ea250c8a517ff7f8158758f79d76c41a6df0a7527a255b4efa97b118f4b');
+
+    objLupaDestinatarios.processarAlteracao = function (pos, texto, valor){
+      seiAlterarContato(valor, 'selDestinatarios', 'frmDocumentoCadastro','controlador.php?acao=contato_alterar&acao_origem=documento_gerar&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=a685fda0cc4b868eb8d383a5e65f5dc6ad95961b3380da1fde1eb2e63c9c09bb');
+    }
+
+    objLupaDestinatarios.processarRemocao = function(itens){
+      for(var i=0;i < itens.length;i++){
+        for(var j=0;j < arrDestinatariosNegados.length; j++){
+          if (itens[i].value == arrDestinatariosNegados[j].id_contato) {
+            alert('Destinatário \"' + itens[i].text + '\" não pode ser removido porque foi adicionado pela unidade ' + arrDestinatariosNegados[j].sigla_unidade + '.');
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
+    document.getElementById('selDestinatarios').ondblclick = function(e){
+      objLupaDestinatarios.alterar();
+    };
+
+    //Anexos
+    objUpload = new infraUpload('frmAnexos','controlador.php?acao=documento_upload_anexo&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=31c204d34cbf2f7bdf3ead863a3c1efe2d5b58581834b2f493be51f1a14183cf');
+    objUpload.validar = function(){
+      var i = 0;
+      var arrExt = [];
+      var oFile = document.getElementById("filArquivo");
+
+      if (oFile.length==0) {
+        return false;
+      }
+      var nomeArquivo,bolFileApi=false;
+      if(oFile.files==undefined){
+        //ie<10
+        nomeArquivo=oFile.value.replace("C:\\fakepath\\", "");
+      } else {
+        bolFileApi=true;
+        nomeArquivo = oFile.files[0].name;
+      }
+
+      if (nomeArquivo.indexOf('&#')!= -1) {
+        alert('Nome do anexo possui caracteres especiais.');
+        return false;
+      }
+
+      if (bolFileApi && oFile.files[0].size > (40 * 1024 * 1024)) {
+        alert('Arquivo excede o tamanho máximo geral permitido para documentos externos de ' + '40' + 'Mb.');
+        return false;
+      }
+
+      if ('1'=='1'){
+
+          arrExt[0] = {nome : "7z", tamanho : 20};
+  arrExt[1] = {nome : "jpg", tamanho : 20};
+  arrExt[2] = {nome : "pdf", tamanho : 40};
+  arrExt[3] = {nome : "png", tamanho : 20};
+  arrExt[4] = {nome : "pdf", tamanho : 40};
+  arrExt[5] = {nome : "bz2", tamanho : 20};
+  arrExt[6] = {nome : "csv", tamanho : 20};
+  arrExt[7] = {nome : "gz", tamanho : 20};
+  arrExt[8] = {nome : "html", tamanho : 20};
+  arrExt[9] = {nome : "jpeg", tamanho : 20};
+  arrExt[10] = {nome : "jpg", tamanho : 20};
+  arrExt[11] = {nome : "json", tamanho : 20};
+  arrExt[12] = {nome : "m4a", tamanho : 20};
+  arrExt[13] = {nome : "mp4", tamanho : 20};
+  arrExt[14] = {nome : "mpeg", tamanho : 20};
+  arrExt[15] = {nome : "mpg", tamanho : 20};
+  arrExt[16] = {nome : "ods", tamanho : 20};
+  arrExt[17] = {nome : "ogg", tamanho : 20};
+  arrExt[18] = {nome : "ogv", tamanho : 20};
+  arrExt[19] = {nome : "pdf", tamanho : 40};
+  arrExt[20] = {nome : "png", tamanho : 20};
+  arrExt[21] = {nome : "rar", tamanho : 20};
+  arrExt[22] = {nome : "svg", tamanho : 20};
+  arrExt[23] = {nome : "tar", tamanho : 20};
+  arrExt[24] = {nome : "tgz", tamanho : 20};
+  arrExt[25] = {nome : "txt", tamanho : 20};
+  arrExt[26] = {nome : "xls", tamanho : 40};
+  arrExt[27] = {nome : "xlsx", tamanho : 20};
+  arrExt[28] = {nome : "xml", tamanho : 20};
+  arrExt[29] = {nome : "zip", tamanho : 20};
+
+        if (arrExt.length==0) {
+          alert('Nenhuma extensão de arquivo permitida foi cadastrada.');
+          return false;
+        }
+
+        nomeArquivo = nomeArquivo.replace(/^.*\./, '').toLowerCase();
+
+        for(i=0; i < arrExt.length; i++){
+          if (nomeArquivo == arrExt[i].nome) {
+            if (bolFileApi && oFile.files[0].size > (arrExt[i].tamanho * 1024 * 1024)) {
+              alert('O tamanho máximo permitido para arquivos com extensão ' + arrExt[i].nome.toUpperCase() + ' é ' + arrExt[i].tamanho + 'Mb.');
+              return false;
+            }
+            break;
+          }
+        }
+
+        if (i == arrExt.length){
+
+          var msg = "O arquivo selecionado não é permitido.\n\nSomente são permitidos arquivos com as extensões: ";
+          for(i=0; i < arrExt.length; i++) {
+            if (i){
+              msg += ', ';
+            }
+            msg += arrExt[i].nome;
+          }
+          msg += '.';
+
+          alert(msg);
+
+          return false;
+        }
+      }
+
+      desabilitarBotaoSalvar(true);
+      return true;
+    };
+
+    objUpload.finalizou = function(arr){
+      objTabelaAnexos.limpar();
+      objTabelaAnexos.adicionar([arr['nome_upload'],arr['nome'],arr['data_hora'],arr['tamanho'],infraFormatarTamanhoBytes(arr['tamanho']),'10733187617' ,'CBMMG/2COB']);
+      objTabelaAnexos.adicionarAcoes(arr['nome_upload'],'',false,true);
+      desabilitarBotaoSalvar(false);
+    };
+
+    objContatoCadastroAutomatico = new infraAjaxComplementar(null,'controlador_ajax.php?acao_ajax=contato_cadastro_contexto_temporario&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=a9e62211e04be0fa44a17917ea0a57027a603f9b0c33072581c1b06543972e5b');
+    objContatoCadastroAutomatico.tipo = null;
+    //objContatoCadastroAutomatico.mostrarAviso = false;
+    //objContatoCadastroAutomatico.tempoAviso = 3000;
+    //objContatoCadastroAutomatico.limparCampo = false;
+
+    objContatoCadastroAutomatico.prepararExecucao = function(){
+      if (this.tipo=='I'){
+        return 'nome='+encodeURIComponent(document.getElementById('txtInteressado').value);
+      }else if (this.tipo=='R'){
+        return 'nome='+encodeURIComponent(document.getElementById('txtRemetente').value);
+      }else if (this.tipo=='D'){
+        return 'nome='+encodeURIComponent(document.getElementById('txtDestinatario').value);
+      }
+    };
+
+    objContatoCadastroAutomatico.processarResultado = function(arr){
+      if (arr!=null){
+        if (this.tipo=='I'){
+          objAutoCompletarInteressadoRI1225.processarResultado(arr['IdContato'], document.getElementById('txtInteressado').value, null);
+        }else if (this.tipo=='R'){
+          objAutoCompletarRemetenteRI1226.selecionar(arr['IdContato'],document.getElementById('txtRemetente').value);
+        }else if (this.tipo=='D'){
+          objAutoCompletarDestinatarioRI1226.processarResultado(arr['IdContato'], document.getElementById('txtDestinatario').value, null);
+        }
+      }
+    };
+
+    objAjaxHipoteseLegal = new infraAjaxMontarSelect('selHipoteseLegal','controlador_ajax.php?acao_ajax=hipotese_legal_select_nome_base_legal&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=8cdca7fbeb1950ac93ea931b4f9827f77b53fbedf35f6cf4628d1e9b0c77b565');
+objAjaxHipoteseLegal.prepararExecucao = function(){
+  if (document.getElementById('optSigiloso').checked){
+    staNivelAcesso = '2';
+  }else if (document.getElementById('optRestrito').checked){
+    staNivelAcesso = '1';
+  }else if (document.getElementById('optPublico').checked){
+    staNivelAcesso = '0';
+  }
+  return infraAjaxMontarPostPadraoSelect('null','',document.getElementById('hdnIdHipoteseLegalSugestao').value) + '&staNivelAcesso=' + staNivelAcesso;
+};
+
+objAjaxTipoProcedimentoSugestoes = new infraAjaxComplementar(null,'controlador_ajax.php?acao_ajax=tipo_procedimento_obter_sugestoes&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=ab3e0c126a0f64de84fe13d1816137d52833d74ccba2cb869aa8f109e45fb508');
+objAjaxTipoProcedimentoSugestoes.prepararExecucao = function(){
+  return 'idTipoProcedimento='+document.getElementById('hdnIdTipoProcedimento').value;
+}
+objAjaxTipoProcedimentoSugestoes.processarResultado = function(arr){
+  if(arr!=null){
+    if (document.getElementById('optSigiloso').checked){
+      for(var i=0; i < document.getElementById('selGrauSigilo').options.length;i++){
+        if (document.getElementById('selGrauSigilo').options[i].value == arr['StaGrauSigiloSugestao']){
+          document.getElementById('selGrauSigilo').options[i].selected = true;
+          break;
+        }
+      }
+    }
+    if (arr['IdHipoteseLegalSugestao']!=undefined){
+      document.getElementById('hdnIdHipoteseLegalSugestao').value = arr['IdHipoteseLegalSugestao'];
+    }
+  }
+  objAjaxHipoteseLegal.executar();
+}
+
+
+    selecionarFormatoDigitalizado();
+
+    infraEfeitoTabelas();
+  }
+
+  function confirmarDados(){
+    if (OnSubmitForm()){
+      submeter();
+    }
+  }
+
+  function submeter(){
+    desabilitarBotaoSalvar(true);
+    document.getElementById('hdnFlagDocumentoCadastro').value = '2';
+    document.getElementById('frmDocumentoCadastro').submit();
+  }
+
+  function OnSubmitForm() {
+    return validarCadastroRI0881();
+  }
+
+  function validarCadastroRI0881() {
+
+    if ('11'=='-1'){
+      if (document.getElementById('hdnIdSerie').value==''){
+        alert('Escolha um Tipo de Documento.');
+        document.getElementById('selSerie').focus();
+        return false;
+      }
+    }
+
+    if ('documento_gerar'=='documento_receber' || 'documento_gerar'=='documento_alterar_recebido'){
+
+      if (document.getElementById('hdnIdRemetente').value=='' && infraTrim(document.getElementById('txtRemetente').value!='')) {
+        alert('Remetente não cadastrado.');
+        document.getElementById('txtRemetente').focus();
+        return false;
+      }
+
+      if (document.getElementById('txtDataElaboracao').value=='') {
+        alert('Informe a Data do Documento.');
+        document.getElementById('txtDataElaboracao').focus();
+        return false;
+      }
+
+      if (!infraValidarData(document.getElementById('txtDataElaboracao'))){
+        return false;
+      }
+
+      if (document.getElementById("optDigitalizado").checked == false && document.getElementById("optNato").checked == false) {
+        alert('Informe o Formato do documento externo.');
+        return false;
+      }
+
+      if (document.getElementById("optDigitalizado").checked == true && !infraSelectSelecionado(document.getElementById("selTipoConferencia"))) {
+        alert('Informe o Tipo de Conferência');
+        document.getElementById('selTipoConferencia').focus();
+        return false;
+      }
+    }
+
+
+    if (document.getElementById('lblNumero').className == 'infraLabelObrigatorio' && infraTrim(document.getElementById('txtNumero').value)==''){
+      alert('Informe o Número.');
+      document.getElementById('txtNumero').focus();
+      return false;
+    }
+
+    if (!document.getElementById('optSigiloso').checked && !document.getElementById('optRestrito').checked && !document.getElementById('optPublico').checked) {
+  alert('Informe o nível de acesso.');
+  return false;
+}
+
+if (document.getElementById('optSigiloso').checked || document.getElementById('optRestrito').checked){
+  if (!infraSelectSelecionado('selHipoteseLegal')){
+    alert('Informe a Hipótese Legal.');
+    document.getElementById('selHipoteseLegal').focus();
+    return false;
+  }
+}
+
+
+
+    
+    return true;
+
+      }
+
+  function tratarEnterInteressado(ev){
+    var key = infraGetCodigoTecla(ev);
+
+    if (key == 13 && document.getElementById('hdnIdInteressado').value=='' && infraTrim(document.getElementById('txtInteressado').value)!=''){
+      if (confirm('Nome inexistente. Deseja incluir?')){
+        objContatoCadastroAutomatico.tipo = 'I';
+        objContatoCadastroAutomatico.executar();
+      }
+    }
+  }
+
+  function tratarEnterRemetente(ev){
+    var key = infraGetCodigoTecla(ev);
+
+    if (key == 13 && document.getElementById('hdnIdRemetente').value=='' && infraTrim(document.getElementById('txtRemetente').value)!=''){
+      if (confirm('Nome inexistente. Deseja incluir?')){
+        objContatoCadastroAutomatico.tipo = 'R';
+        objContatoCadastroAutomatico.executar();
+      }
+    }
+  }
+
+  function tratarEnterDestinatario(ev){
+    var key = infraGetCodigoTecla(ev);
+
+    if (key == 13 && document.getElementById('hdnIdDestinatario').value=='' && infraTrim(document.getElementById('txtDestinatario').value)!=''){
+      if (confirm('Nome inexistente. Deseja incluir?')){
+        objContatoCadastroAutomatico.tipo = 'D';
+        objContatoCadastroAutomatico.executar();
+      }
+    }
+  }
+
+  function configurarTextoInicial(){
+    if (document.getElementById('optTextoPadrao').checked){
+      document.getElementById('selTextoPadrao').style.visibility = 'visible';
+      document.getElementById('selTextoPadrao').focus();
+      document.getElementById('txtProtocoloDocumentoTextoBase').style.visibility = 'hidden';
+      document.getElementById('lblOuModeloFavorito').style.visibility = 'hidden';
+      document.getElementById('btnEscolherDocumentoTextoBase').style.visibility = 'hidden';
+      document.getElementById('txtProtocoloDocumentoTextoBase').value = '';
+    }else if (document.getElementById('optProtocoloDocumentoTextoBase').checked){
+      document.getElementById('selTextoPadrao').style.visibility = 'hidden';
+      document.getElementById('selTextoPadrao').options.selectedIndex = 0;
+      document.getElementById('txtProtocoloDocumentoTextoBase').style.visibility = 'visible';
+      document.getElementById('lblOuModeloFavorito').style.visibility = 'visible';
+      document.getElementById('btnEscolherDocumentoTextoBase').style.visibility = 'visible';
+      document.getElementById('txtProtocoloDocumentoTextoBase').focus();
+    }else{
+      document.getElementById('selTextoPadrao').options.selectedIndex = 0;
+      document.getElementById('txtProtocoloDocumentoTextoBase').value = '';
+      document.getElementById('selTextoPadrao').style.visibility = 'hidden';
+      document.getElementById('txtProtocoloDocumentoTextoBase').style.visibility = 'hidden';
+      document.getElementById('lblOuModeloFavorito').style.visibility = 'hidden';
+      document.getElementById('btnEscolherDocumentoTextoBase').style.visibility = 'hidden';
+    }
+  }
+
+  function trocarSerie(){
+    document.getElementById('hdnIdSerie').value = document.getElementById('selSerie').value;
+    document.getElementById('frmDocumentoCadastro').submit();
+  }
+
+  function desabilitarBotaoSalvar(estado){
+    var arrBotoesSalvar = document.getElementsByName('btnSalvar');
+    for(var i=0; i < arrBotoesSalvar.length; i++){
+      arrBotoesSalvar[i].disabled = estado;
+    }
+  }
+
+  function selecionarFormatoDigitalizado() {
+
+    if (document.getElementById('optDigitalizado').checked){
+      document.getElementById("lblTipoConferencia").style.display = "block";
+      document.getElementById("selTipoConferencia").style.display = "block";
+    } else {
+      document.getElementById("lblTipoConferencia").style.display = "none";
+      document.getElementById("selTipoConferencia").style.display = "none";
+      document.getElementById("selTipoConferencia").selectedIndex = 0;
+    }
+  }
+
+
+
+//--><!]]>
+</script>
 </head>
-<body>
-<table border="0" cellpadding="0" cellspacing="0" style="margin-left:auto;margin-right:auto;width:98%;">
-	<tbody>
-		<tr>
-			<td style="width: 16%;">
-			<p class="Texto_Centralizado"><img alt="Timbre" src="data:image/png;base64,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" /></p>
-			</td>
-			<td style="width: 528px;">
-			<p><strong>GOVERNO DO ESTADO DE MINAS GERAIS</strong></p>
+<body onload="infraProcessarResize();infraProcessarMouseDown();inicializar();">
+<div id="divInfraAreaGlobal" class="infraAreaGlobal" style="border:0px;">
+<div id="divInfraAreaTela" class="infraAreaTela">
+<div id="divInfraAreaTelaD" class="infraAreaTelaD" style="width:99%">
+<div id="divInfraBarraLocalizacao" class="infraBarraLocalizacao">Gerar Documento</div>
+  <form id="frmDocumentoCadastro" method="post" onsubmit="return OnSubmitForm();" action="controlador.php?acao=documento_gerar&acao_origem=documento_gerar&arvore=1&id_procedimento=53828072&id_serie=11&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=0293c2b96fee6bcba468a8ec5c6003dbefe4503acc017e2868b409a9dab46ce2" style="display:inline;">
+    <input type="hidden" id="hdnInfraTipoPagina" name="hdnInfraTipoPagina" value="2" />
+<div id="divInfraBarraComandosSuperior" class="infraBarraComandos">
+<button tabindex="451" type="button" onclick="confirmarDados()" accesskey="C" name="btnSalvar" id="btnSalvar" value="Confirmar Dados" class="infraButton"><span class="infraTeclaAtalho">C</span>onfirmar Dados</button>&nbsp;
+<button tabindex="452" type="button" accesskey="V" name="btnCancelar" value="Voltar" onclick="location.href='controlador.php?acao=documento_escolher_tipo&acao_origem=documento_gerar&arvore=1&id_procedimento=53828072&id_serie=11&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=aa841a7ca96a3f7c715263cb0f32e7d6def543c62ffb034904685ac0a158a37a#ID-11';" class="infraButton"><span class="infraTeclaAtalho">V</span>oltar</button>&nbsp;
+</div>
+    <div id="divSerieTitulo" class="tituloProcessoDocumento">
+      <label id="lblSerieTitulo">Ofício</label>
+    </div>
 
-			<p><strong>CORPO DE BOMBEIROS MILITAR DE MINAS GERAIS</strong></p>
+    <div id="divUnidadesReabertura" class="infraAreaDados" style="height:7em;">
+      <label id="lblUnidadesReabertura" for="selUnidadesReabertura" class="infraLabelOpcional">Reabrir processo nas unidades:</label>
+      <select id="selUnidadesReabertura" name="selUnidadesReabertura" size="3" multiple="multiple" class="infraSelect" tabindex="501">
+      </select>
+      <div id="divOpcoesUnidadesReabertura">
+        <img id="imgLupaUnidadesReabertura" onclick="objLupaUnidadesReabertura.selecionar(700,500);" src="/infra_css/imagens/lupa.gif" alt="Selecionar Unidade" title="Selecionar Unidade" class="infraImg" tabindex="502" />
+        <img id="imgExcluirUnidadesReabertura" onclick="objLupaUnidadesReabertura.remover();" src="/infra_css/imagens/remover.gif" alt="Remover Unidades Selecionadas" title="Remover Unidades Selecionadas" class="infraImg" tabindex="503" />
+      </div>
+    </div>
 
-			<p><strong>12&ordm; Batalh&atilde;o de Bombeiros Militar</strong></p>
-			</td>
-		</tr>
-	</tbody>
-</table>
-<p class="Texto_Justificado_Recuo_Primeira_Linha">&nbsp;&nbsp;</p>
+    <div id="divSerieDataElaboracao" class="infraAreaDados" style="height:4.6em;">
+      <label id="lblSerie" for="selSerie" accesskey="" class="infraLabelObrigatorio">Tipo do Documento:</label>
+      <select id="selSerie" name="selSerie" onchange="trocarSerie();" class="infraSelect" tabindex="504" >
+              </select>
 
-<p class="Texto_Alinhado_Esquerda"><strong>Processo</strong> n&ordm; 1400.01.0020583/2022-53</p>
+      <label id="lblDataElaboracao" for="txtDataElaboracao" class="infraLabelObrigatorio">Data de Elaboração:</label>
+      <input type="text" id="txtDataElaboracao" name="txtDataElaboracao" onkeypress="return infraMascaraData(this, event)" class="infraText" value="24/05/2022" tabindex="505"/>
+      <img id="imgDataElaboracao" src="/infra_css/imagens/calendario.gif" alt="Selecionar Data" onclick="infraCalendario('txtDataElaboracao',this);" title="Selecionar Data" class="infraImg" tabindex="506" />
+    </div>
 
-<p class="Local_e_Data_Direita">Patos de Minas, 13 de maio de 2022.</p>
-<p class="Assunto_Negrito">Proced&ecirc;ncia:&nbsp;Despacho n&ordm; 752/2022/CBMMG/12BBM</p>
+    <div id="divTextoInicial" class="infraAreaDados" style="height:10em;">
+      <fieldset id="fldTextoInicial" class="infraFieldset">
+        <legend class="infraLegend">&nbsp;Texto Inicial&nbsp;</legend>
 
-<p class="Assunto_Negrito">&nbsp;</p>
+        <div id="divOptProtocoloDocumentoTextoBase" class="infraDivRadio">
+          <input type="radio"   onclick="configurarTextoInicial();" name="rdoTextoInicial" id="optProtocoloDocumentoTextoBase" value="D" class="infraRadio"/>
+          <span id="spnProtocoloDocumentoTextoBase"><label id="lblProtocoloDocumentoTextoBase" for="optProtocoloDocumentoTextoBase" class="infraLabelRadio" tabindex="507">Documento Modelo</label></span>
+        </div>
 
-<p class="Assunto_Negrito">Destinat&aacute;rio(s): Ao Senhor Ten Cel BM Cmte do 12&ordm; BBM.</p>
-<p class="Texto_Alinhado_Direita">&nbsp;</p>
+        <input type="text" id="txtProtocoloDocumentoTextoBase" name="txtProtocoloDocumentoTextoBase" onkeypress="return infraMascaraNumero(this, event)" maxlength="8" class="infraText" value="46850977" tabindex="508" />
+        <label id="lblOuModeloFavorito">ou</label>
+        <button type="button" id="btnEscolherDocumentoTextoBase" name="btnEscolherDocumentoTextoBase" onclick="objLupaDocumentoTextoBase.selecionar(700,500);" tabindex="509" class="infraButton">Selecionar nos Favoritos</button>
 
-<p><strong>Assunto: </strong>Encaminhamento de documento</p>
+        <div id="divOptTextoPadrao" class="infraDivRadio">
+          <input type="radio"  onclick="configurarTextoInicial();" name="rdoTextoInicial" id="optTextoPadrao" value="T" class="infraRadio"/>
+          <span id="spnTextoPadrao"><label id="lblTextoPadrao" for="optTextoPadrao" class="infraLabelRadio" tabindex="510">Texto Padrão</label></span>
+        </div>
 
-<p class="Texto_Centralizado"><strong>DESPACHO</strong></p>
+        <select id="selTextoPadrao" name="selTextoPadrao" class="infraSelect" tabindex="511"  >
+          <option value="null" selected="selected">&nbsp;</option>
+<option value="4292">Assinatura Ten Falcão</option>
+<option value="4542">Assinatura Tenente Morais</option>
+<option value="51786">DESPACHO P/ EMPENHO DE DESPESAS S. PESSOAL</option>
+<option value="98838">DESPACHOS (RELATÓRIOS DE VIAGEM)</option>
+<option value="287788">Despachos (Brumadinho)</option>
+<option value="438915">Modelo AADP</option>
+<option value="92188">Notificação de AADP</option>
+<option value="88438">Notificação de ADI</option>
+<option value="69386">Oficio de remessa de processos de promoção.</option>
+<option value="10066">Ofício Padrão</option>
+<option value="5043">Remessa de documentos</option>
+<option value="416621">Solicitação de crédito orçamentário</option>
+        </select>
 
-<p class="Texto_Justificado">&nbsp;</p>
+        <div id="divOptNenhum" class="infraDivRadio">
+          <input type="radio" checked="checked" onclick="configurarTextoInicial();" name="rdoTextoInicial" id="optNenhum" value="N" class="infraRadio"/>
+          <span id="spnNenhum"><label id="lblNenhum" for="optNenhum" class="infraLabelRadio" tabindex="512">Nenhum</label></span>
+        </div>
 
-<p class="Texto_Justificado">Senhor Comandante,</p>
+        <input type="hidden" id="hdnIdDocumentoTextoBase" name="hdnIdDocumentoTextoBase" value="" />
 
-<p class="Texto_Justificado">&nbsp;</p>
+      </fieldset>
+    </div>
 
-<p class="Texto_Justificado">Encaminho a V.S&ordf;. o documento em anexo para conhecimento e provid&ecirc;ncias decorrentes.</p>
+    <div id="divNumero" class="infraAreaDados" style="height:4.6em;">
+      <label id="lblNumero" for="txtNumero" class="infraLabelOpcional">Número:</label>
+      <input type="text" id="txtNumero" onkeypress="return infraLimitarTexto(this,event,50);" name="txtNumero" class="infraText" value="" tabindex="513"/>
+    </div>
 
-<p class="Texto_Justificado">&nbsp;</p>
+    <div id="divFormato" class="infraAreaDados" style="height:9em;">
 
-<p class="Texto_Justificado">Respeitosamente,</p>
+      <fieldset id="fldFormato" class="infraFieldset">
+        <legend class="infraLegend">&nbsp;Formato&nbsp;<a href="javascript:void(0);" id="ancAjudaFormato" onmouseover="return infraTooltipMostrar('Selecione a opção \&amp;quot;Nato-digital\&amp;quot; se o arquivo a ser registrado foi criado ou recebido por meio eletrônico.\n\n\nSelecione a opção \&amp;quot;Digitalizado nesta Unidade\&amp;quot; somente se o arquivo a ser registrado foi produzido a partir da digitalização de um documento em papel.');" onmouseout="return infraTooltipOcultar();"><img src="/infra_css/imagens/ajuda.gif" class="infraImg"/></a> </legend>
 
-<p class="Texto_Justificado">Elias Sim&atilde;o, Cap BM</p>
+        <div id="divOptNato" class="infraDivRadio">
+          <input type="radio" name="rdoFormato" id="optNato" value="N" class="infraRadio"   onclick="selecionarFormatoDigitalizado();" />
+          <span id="spnNato"><label id="lblNato" for="optNato" class="infraLabelRadio" tabindex="514">Nato-digital</label></span>
+        </div>
 
-<p class="Texto_Justificado">Comandante da 2&ordf; Cia BM Una&iacute;.</p>
+        <div id="divOptDigitalizado" class="infraDivRadio">
+          <input type="radio" name="rdoFormato" id="optDigitalizado" value="D" class="infraRadio"   onclick="selecionarFormatoDigitalizado();" />
+          <span id="spnDigitalizado"><label id="lblDigitalizado" for="optDigitalizado" class="infraLabelRadio" tabindex="515">Digitalizado nesta Unidade</label></span>
+        </div>
 
-<p class="Texto_Justificado">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+      </fieldset>
 
-<p class="Texto_Justificado">&nbsp;</p>
-<hr style="margin: 0 0 4px 0;" />  <table>    <tr>      <td>  <img alt="logotipo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFkAAAA8CAMAAAA67OZ0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAADTtpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+Cjx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDQuMi4yLWMwNjMgNTMuMzUyNjI0LCAyMDA4LzA3LzMwLTE4OjEyOjE4ICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICAgeG1sbnM6eG1wUmlnaHRzPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvcmlnaHRzLyIKICAgIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIKICAgIHhtbG5zOklwdGM0eG1wQ29yZT0iaHR0cDovL2lwdGMub3JnL3N0ZC9JcHRjNHhtcENvcmUvMS4wL3htbG5zLyIKICAgeG1wUmlnaHRzOldlYlN0YXRlbWVudD0iIgogICBwaG90b3Nob3A6QXV0aG9yc1Bvc2l0aW9uPSIiPgogICA8ZGM6cmlnaHRzPgogICAgPHJkZjpBbHQ+CiAgICAgPHJkZjpsaSB4bWw6bGFuZz0ieC1kZWZhdWx0Ii8+CiAgICA8L3JkZjpBbHQ+CiAgIDwvZGM6cmlnaHRzPgogICA8ZGM6Y3JlYXRvcj4KICAgIDxyZGY6U2VxPgogICAgIDxyZGY6bGk+QWxiZXJ0byBCaWdhdHRpPC9yZGY6bGk+CiAgICA8L3JkZjpTZXE+CiAgIDwvZGM6Y3JlYXRvcj4KICAgPGRjOnRpdGxlPgogICAgPHJkZjpBbHQ+CiAgICAgPHJkZjpsaSB4bWw6bGFuZz0ieC1kZWZhdWx0Ii8+CiAgICA8L3JkZjpBbHQ+CiAgIDwvZGM6dGl0bGU+CiAgIDx4bXBSaWdodHM6VXNhZ2VUZXJtcz4KICAgIDxyZGY6QWx0PgogICAgIDxyZGY6bGkgeG1sOmxhbmc9IngtZGVmYXVsdCIvPgogICAgPC9yZGY6QWx0PgogICA8L3htcFJpZ2h0czpVc2FnZVRlcm1zPgogICA8SXB0YzR4bXBDb3JlOkNyZWF0b3JDb250YWN0SW5mbwogICAgSXB0YzR4bXBDb3JlOkNpQWRyRXh0YWRyPSIiCiAgICBJcHRjNHhtcENvcmU6Q2lBZHJDaXR5PSIiCiAgICBJcHRjNHhtcENvcmU6Q2lBZHJSZWdpb249IiIKICAgIElwdGM0eG1wQ29yZTpDaUFkclBjb2RlPSIiCiAgICBJcHRjNHhtcENvcmU6Q2lBZHJDdHJ5PSIiCiAgICBJcHRjNHhtcENvcmU6Q2lUZWxXb3JrPSIiCiAgICBJcHRjNHhtcENvcmU6Q2lFbWFpbFdvcms9IiIKICAgIElwdGM0eG1wQ29yZTpDaVVybFdvcms9IiIvPgogIDwvcmRmOkRlc2NyaXB0aW9uPgogPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgIAo8P3hwYWNrZXQgZW5kPSJ3Ij8+RO84nQAAAwBQTFRFamts+fn5mp6hc3Nz9fX1U1NTS0tKnaGk6unqzM3P7e3u8fHxuLm7/Pz8lZmc2dnZxcXGWlpavr29wsLCp6eniYmKhYaGZWZmkpaZ0dHS5eXlkZGSrq2utbW2XV1d4uHhfX1+sbGy1dXW3d3dqampgYGCjY2OyMnKYWJi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" />      </td>      <td>  <p style="margin:0;text-align: left; font-size:11pt;font-family: Calibri;">Documento assinado eletronicamente por <b>Elias Simao</b>, <b>Capit&atilde;o</b>, em 13/05/2022, &agrave;s 14:31, conforme hor&aacute;rio oficial de Bras&iacute;lia, com fundamento no art. 6&ordm;, &sect; 1&ordm;, do <a title="Acesse o Decreto" href="https://www.almg.gov.br/consulte/legislacao/completa/completa.html?tipo=DEC&num=47222&comp=&ano=2017" target="_blank">Decreto n&ordm; 47.222, de 26 de julho de 2017</a>.</p>      </td>    </tr>  </table><hr style="margin: 0 0 4px 0;" />  <table>    <tr>      <td>       <img align="center" alt="QRCode Assinatura" title="QRCode Assinatura" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFYAAABWAQMAAABvmPO0AAAABlBMVEX///8AAABVwtN+AAABTklEQVQ4jXXSQWoFMQgGYMFtIFcR3ApePZCt4FUCbgPW1xbe+Eqz+hiIo38E+OdoguM13XmaCekkwGWgZg7YlHRCP03MoQf/eMpwl/gwIbMp/dZ/W5N/znc/bwPMgLHjp+u3Na47ig1bzXNUrbvq02kWBEjkSwua+Z40q3qXmkF9BaWtuZpxGMm+nDXL04QDBeelCc1sQHsyhazmEWcaq4wNzRX3olg1+ul2oFSMVztP18wVwKZTPT/NzieGy/JuAhngkZndc2MGycVK92msgiFBPlbziJs2dcA+3eSmuV5srkszhjh5t9gaJnVvUXckXph25ofJKGslz+tNH6aZo/bsvt72aRbl7Yjf+T9MTGrhWYM2V0dbrjHxadbKKIauYGgmBHz959QyPc0hZ+a8Whl+GLdeWeN8OkLndYFmQt17LmRbzZqayW7bofmf8wXdgJQyt5hm6QAAAABJRU5ErkJggg==" />      </td>      <td>       <p style="margin:0;text-align: left; font-size:11pt;font-family: Calibri;">A autenticidade deste documento pode ser conferida no site <a title="P&aacute;gina de Autenticidade de Documentos" href="http://sei.mg.gov.br/sei/controlador_externo.php?acao=documento_conferir&id_orgao_acesso_externo=0" target="_blank">http://sei.mg.gov.br/sei/controlador_externo.php?acao=documento_conferir&id_orgao_acesso_externo=0</a>, informando o c&oacute;digo verificador <b>46536610</b> e o c&oacute;digo CRC <b>4F3B3A83</b>.</p>      </td>    </tr>  </table>  <hr style="margin:1px;" />  <br /><hr style="border:none; padding:0; margin:5px 2px 0 2px; border-top:medium double #333" />
-<table border="0" cellpadding="2" cellspacing="0" width="100%">
-<tr>
-<td align="left" style="font-family:Calibri;font-size:9pt;border:0;" width="50%"><strong>Refer&ecirc;ncia:</strong> Processo n&ordm; 1400.01.0020583/2022-53</td>
-<td align="right" style="font-family:Calibri;font-size:9pt;border:0;" width="50%">SEI n&ordm; 46536610</td>
-</tr>
-</table><hr style="border:1px solid #c0c0c0;" />Criado por <a onclick="alert('Elias Simao')" alt="Elias Simao" title="Elias Simao" style="color:#0066cc;text-decoration:none;cursor:pointer;">01893175154</a>, versão 2 por <a onclick="alert('Elias Simao')" alt="Elias Simao" title="Elias Simao" style="color:#0066cc;text-decoration:none;cursor:pointer;">01893175154</a> em 13/05/2022 14:31:24.
+      <label id="lblTipoConferencia" name="lblTipoConferencia" for="selTipoConferencia" accesskey="" class="infraLabelObrigatorio">Tipo de Conferência: </label>
+      <select id="selTipoConferencia" name="selTipoConferencia"  tabindex="516">
+              </select>
+
+    </div>
+
+    <div id="divDescricao" class="infraAreaDados" style="height:4.6em;">
+      <label id="lblDescricao" for="txtDescricao" accesskey="" class="infraLabelOpcional">Descrição:</label>
+      <input type="text" id="txtDescricao" name="txtDescricao" onkeypress="return infraMascaraTexto(this,event,250);" maxlength="250" class="infraText" value="" tabindex="517" />
+    </div>
+
+    <div id="divRemetente" class="infraAreaDados" style="height:4.6em;">
+      <label id="lblRemetente" for="txtRemetente" accesskey="R" class="infraLabelOpcional"><span class="infraTeclaAtalho">R</span>emetente:</label>
+      <input type="text" id="txtRemetente" name="txtRemetente" class="infraText" value="" tabindex="518" />
+      <input type="hidden" id="hdnIdRemetente" name="hdnIdRemetente" value="" />
+      <div id="divOpcoesRemetente">
+        <img id="imgPesquisarRemetente" onclick="objLupaRemetente.selecionar(700,500);" src="/infra_css/imagens/lupa.gif" alt="Selecionar Remetente" title="Selecionar Remetente" class="infraImg" tabindex="519" />
+        <img id="imgAlterarRemetente" onclick="objLupaRemetente.alterar();" src="/infra_css/imagens/alterar.gif" alt="Consultar/Alterar Dados do Remetente Selecionado" title="Consultar/Alterar Dados do Remetente Selecionado" class="infraImg" tabindex="520"/>
+      </div>
+    </div>
+
+    <div id="divInteressados" class="infraAreaDados" style="height:11em;">
+      <label id="lblInteressados" for="txtInteressado" accesskey="I" class="infraLabelOpcional"><span class="infraTeclaAtalho">I</span>nteressados:</label>
+      <input type="text" id="txtInteressado" name="txtInteressado" class="infraText" tabindex="521" />
+      <input type="hidden" id="hdnIdInteressado" name="hdnIdInteressado" class="infraText" value="" />
+      <select id="selInteressados" name="selInteressados" class="infraSelect" multiple="multiple" tabindex="522"  >
+              </select>
+      <div id="divOpcoesInteressados">
+        <img id="imgSelecionarGrupo" onclick="objLupaInteressados.selecionar(700,500);" src="/infra_css/imagens/lupa.gif" title="Selecionar Contatos para Interessados" alt="Selecionar Contatos para Interessados" class="infraImg" tabindex="523" />
+        <img id="imgAlterarInteressado" onclick="objLupaInteressados.alterar();" src="/infra_css/imagens/alterar.gif" alt="Consultar/Alterar Dados do Interessado Selecionado" title="Consultar/Alterar Dados do Interessado Selecionado" class="infraImg" tabindex="524"/>
+        <img id="imgRemoverInteressados" onclick="objLupaInteressados.remover();" src="/infra_css/imagens/remover.gif" alt="Remover Interessados Selecionados" title="Remover Interessados Selecionados" class="infraImg" tabindex="525"/>
+        <br />
+        <img id="imgInteressadosAcima" onclick="objLupaInteressados.moverAcima();" src="/infra_css/imagens/seta_acima_select.gif" alt="Mover Acima Interessado Selecionado" title="Mover Acima Interessado Selecionado" class="infraImg" tabindex="526" />
+        <img id="imgInteressadosAbaixo" onclick="objLupaInteressados.moverAbaixo();" src="/infra_css/imagens/seta_abaixo_select.gif" alt="Mover Abaixo Interessado Selecionado" title="Mover Abaixo Interessado Selecionado" class="infraImg" tabindex="527" />
+      </div>
+    </div>
+
+    <div id="divDestinatarios" class="infraAreaDados" style="height:11em;">
+      <label id="lblDestinatarios" for="txtDestinatario" accesskey="e" class="infraLabelOpcional">D<span class="infraTeclaAtalho">e</span>stinatários:</label>
+      <input type="text" id="txtDestinatario" name="txtDestinatario" class="infraText" tabindex="528" />
+      <input type="hidden" id="hdnIdDestinatario" name="hdnIdDestinatario" class="infraText" value="" />
+      <select id="selDestinatarios" name="selDestinatarios" class="infraSelect" multiple="multiple" tabindex="529"  >
+              </select>
+
+      <div id="divOpcoesDestinatarios">
+        <img id="imgSelecionarGrupo" onclick="objLupaDestinatarios.selecionar(700,500);" src="/infra_css/imagens/lupa.gif" title="Selecionar Contatos para Destinatários" alt="Selecionar Contatos para Destinatários" class="infraImg" tabindex="530" />
+        <img id="imgAlterarDestinatario" onclick="objLupaDestinatarios.alterar();" src="/infra_css/imagens/alterar.gif" alt="Consultar/Alterar Dados do Destinatário Selecionado" title="Consultar/Alterar Dados do Destinatário Selecionado" class="infraImg" tabindex="531"/>
+        <img id="imgRemoverDestinatarios" onclick="objLupaDestinatarios.remover();" src="/infra_css/imagens/remover.gif" alt="Remover Destinatários Selecionados" title="Remover Destinatários Selecionados" class="infraImg" tabindex="532"/>
+        <br />
+        <img id="imgDestinatariosAcima" onclick="objLupaDestinatarios.moverAcima();" src="/infra_css/imagens/seta_acima_select.gif" alt="Mover Acima Destinatário Selecionado" title="Mover Acima Destinatário Selecionado" class="infraImg" tabindex="533" />
+        <img id="imgDestinatariosAbaixo" onclick="objLupaDestinatarios.moverAbaixo();" src="/infra_css/imagens/seta_abaixo_select.gif" alt="Mover Abaixo Destinatário Selecionado" title="Mover Abaixo Destinatário Selecionado" class="infraImg" tabindex="534" />
+      </div>
+    </div>
+
+    <div id="divAssuntos" class="infraAreaDados" style="height:11em;">
+      <label id="lblAssuntos" for="txtAssunto" accesskey="u" class="infraLabelOpcional">Classificação por Ass<span class="infraTeclaAtalho">u</span>ntos:</label>
+      <input type="text" id="txtAssunto" name="txtAssunto" class="infraText" tabindex="535" />
+      <input type="hidden" id="hdnIdAssunto" name="hdnIdAssunto" class="infraText" value="" />
+      <select id="selAssuntos" name="selAssuntos" class="infraSelect" multiple="multiple" tabindex="536" >
+              </select>
+      <div id="divOpcoesAssuntos">
+        <img id="imgPesquisarAssuntos" onclick="objLupaAssuntos.selecionar(700,500);" src="/infra_css/imagens/lupa.gif" alt="Pesquisa de Assuntos" title="Pesquisa de Assuntos" class="infraImg" tabindex="537" />
+        <img id="imgRemoverAssuntos" onclick="objLupaAssuntos.remover();" src="/infra_css/imagens/remover.gif" alt="Remover Assuntos Selecionados" title="Remover Assuntos Selecionados" class="infraImg" tabindex="538" />
+        <br />
+        <img id="imgAssuntosAcima" onclick="objLupaAssuntos.moverAcima();" src="/infra_css/imagens/seta_acima_select.gif" alt="Mover Acima Assunto Selecionado" title="Mover Acima Assunto Selecionado" class="infraImg" tabindex="539" />
+        <img id="imgAssuntosAbaixo" onclick="objLupaAssuntos.moverAbaixo();" src="/infra_css/imagens/seta_abaixo_select.gif" alt="Mover Abaixo Assunto Selecionado" title="Mover Abaixo Assunto Selecionado" class="infraImg" tabindex="540" />
+      </div>
+    </div>
+
+    <div id="divObservacoes" class="infraAreaDados" style="height:8em;">
+      <label id="lblObservacoes" for="txaObservacoes" accesskey="O" class="infraLabelOpcional"><span class="infraTeclaAtalho">O</span>bservações desta unidade:</label>
+      <textarea id="txaObservacoes" name="txaObservacoes" class="infraTextArea" rows="3" onkeypress="return infraLimitarTexto(this,event,1000);" tabindex="541" ></textarea>
+    </div>
+
+    <div id="divObservacoesOutras" class="infraAreaTabela" style="padding-bottom: 1.5em;">
+          </div>
+
+    <div id="divNivelAcesso" class="infraAreaDados">
+<fieldset id="fldNivelAcesso" class="infraFieldset">
+<legend class="infraLegend">&nbsp;Nível de Acesso&nbsp;</legend>
+
+<div id="divOptSigiloso" class="infraDivRadio">
+  <input disabled="disabled" type="radio" name="rdoNivelAcesso" id="optSigiloso" onchange="alterarNivelAcesso()" value="2"  class="infraRadio"/>
+  <span disabled="disabled" id="spnSigiloso"><label id="lblSigiloso" for="optSigiloso" class="infraLabelRadio">Sigiloso</label><label>&nbsp;</label></span>
+  <select id="selGrauSigilo" name="selGrauSigilo" class="infraSelect">
+<option value="null" selected="selected">&nbsp;</option>
+<option value="U">Ultrassecreto</option>
+<option value="S">Secreto</option>
+<option value="R">Reservado</option>
+  </select>
+</div>
+
+<div id="divOptRestrito" class="infraDivRadio">
+  <input  type="radio" name="rdoNivelAcesso" id="optRestrito" onchange="alterarNivelAcesso()" value="1"  class="infraRadio"/>
+  <span  id="spnRestrito"><label id="lblRestrito" for="optRestrito" class="infraLabelRadio">Restrito</label></span>
+</div>
+
+<div id="divOptPublico" class="infraDivRadio">
+  <input  type="radio" name="rdoNivelAcesso" id="optPublico" onchange="alterarNivelAcesso()" value="0"  class="infraRadio"/>
+  <span  id="spnPublico"><label id="lblPublico" for="optPublico" class="infraLabelRadio">Público</label></span>
+</div>
+
+<label id="lblHipoteseLegal" for="selHipoteseLegal" accesskey="" class="infraLabelObrigatorio">Hipótese Legal:</label>
+<select id="selHipoteseLegal" name="selHipoteseLegal" class="infraSelect">
+</select>
+
+</fieldset>
+</div>
+
+
+    <input type="hidden" id="hdnFlagDocumentoCadastro" name="hdnFlagDocumentoCadastro" value="1"/>
+    <input type="hidden" id="hdnAssuntos" name="hdnAssuntos" value="" />
+    <input type="hidden" id="hdnInteressados" name="hdnInteressados" value="" />
+    <input type="hidden" id="hdnDestinatarios" name="hdnDestinatarios" value="" />
+    <input type="hidden" id="hdnIdSerie" name="hdnIdSerie" value="11" />
+    <input type="hidden" id="hdnIdUnidadeGeradoraProtocolo" name="hdnIdUnidadeGeradoraProtocolo" value="110000785" />
+    <input type="hidden" id="hdnStaDocumento" name="hdnStaDocumento" value="I" />
+    <input type="hidden" id="hdnIdTipoConferencia" name="hdnIdTipoConferencia" value="" />
+    <input type="hidden" id="hdnStaNivelAcessoLocal" name="hdnStaNivelAcessoLocal" value="" />
+    <input type="hidden" id="hdnIdHipoteseLegal" name="hdnIdHipoteseLegal" value="" />
+    <input type="hidden" id="hdnStaGrauSigilo" name="hdnStaGrauSigilo" value="" />
+    <input type="hidden" id="hdnIdDocumento" name="hdnIdDocumento" value="" />
+    <input type="hidden" id="hdnIdProcedimento" name="hdnIdProcedimento" value="53828072" />
+    <input type="hidden" id="hdnAnexos" name="hdnAnexos" value=""/>
+    <input type="hidden" id="hdnIdHipoteseLegalSugestao" name="hdnIdHipoteseLegalSugestao" value="" />
+    <input type="hidden" id="hdnIdTipoProcedimento" name="hdnIdTipoProcedimento" value="100000647" />
+    <input type="hidden" id="hdnUnidadesReabertura" name="hdnUnidadesReabertura" value="" />
+    <input type="hidden" id="hdnSinBloqueado" name="hdnSinBloqueado" value="N" />
+
+    <input type="hidden" id="hdnContatoObject" name="hdnContatoObject" value="" />
+    <input type="hidden" id="hdnContatoIdentificador" name="hdnContatoIdentificador" value="" />
+
+    <input type="hidden" id="hdnAssuntoIdentificador" name="hdnAssuntoIdentificador" value="" />
+
+  </form>
+
+  <form id="frmAnexos">
+    <div id="divArquivo" class="infraAreaDados">
+      <label id="lblArquivo" for="filArquivo" accesskey="" class="infraLabelOpcional">Anexar Arquivo:</label>
+      <input type="file" id="filArquivo" name="filArquivo" size="50" onchange="objUpload.executar();" tabindex="1000"/><br />
+    </div>
+
+    <div id="divAnexos" class="infraAreaDadosDinamica" style="width:90%;margin-left:0px;" >
+      <table id="tblAnexos" name="tblAnexos" class="infraTable" style="width:100%">
+        <caption class="infraCaption">Lista de Anexos (0 registros):</caption>
+
+        <tr>
+          <th width="1%" style="display:none;">ID</th>
+          <th class="infraTh">Nome</th>
+          <th width="22%" class="infraTh" align="center">Data</th>
+          <th width="1%" style="display:none;">Bytes</th>
+          <th width="13%" class="infraTh" align="center">Tamanho</th>
+          <th width="10%" class="infraTh" align="center">Usuário</th>
+          <th width="10%" class="infraTh" align="center">Unidade</th>
+          <th width="10%" class="infraTh">Ações</th>
+        </tr>
+      </table>
+      <!-- campo hidden correspondente (hdnAnexos) deve ficar no outro form -->
+    </div>
+  </form>
+<div id="divInfraBarraComandosInferior" class="infraBarraComandos">
+<br /><button tabindex="32701" type="button" onclick="confirmarDados()" accesskey="C" name="btnSalvar" id="btnSalvar" value="Confirmar Dados" class="infraButton"><span class="infraTeclaAtalho">C</span>onfirmar Dados</button>&nbsp;
+<button tabindex="32702" type="button" accesskey="V" name="btnCancelar" value="Voltar" onclick="location.href='controlador.php?acao=documento_escolher_tipo&acao_origem=documento_gerar&arvore=1&id_procedimento=53828072&id_serie=11&infra_sistema=100000100&infra_unidade_atual=110000785&infra_hash=aa841a7ca96a3f7c715263cb0f32e7d6def543c62ffb034904685ac0a158a37a#ID-11';" class="infraButton"><span class="infraTeclaAtalho">V</span>oltar</button>&nbsp;
+</div>
+</div></div>
+</div>
+<input type="hidden" id="hdnInfraPrefixoCookie" name="hdnInfraPrefixoCookie" value="GOVMG_SEI_10733187617" />
+<div id="infraDivImpressao" class="infraImpressao"></div>
 </body>
 </html>

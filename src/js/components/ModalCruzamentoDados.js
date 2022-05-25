@@ -1,13 +1,13 @@
 import * as functions from '../functions/functions.js'
 
-const ModalAnaliseCSV = () => {
+const ModalCruzamentoDados = () => {
   $('body').append(`
-  <div id="analiseCSV" title="Base de dados - Cabeçalhos e registros">
-  <p>Análise da base de dados:</p>
+  <div id="cruzData" title="Cruzamento de dados">
+  <p>Segue a abaixo o relacionamento entre cabeçalhos da base de dados e os campos dinâmicos do documento modelo:</p>
   </div>
   `)
 
-  $('#analiseCSV').dialog({
+  $('#cruzData').dialog({
     autoOpen: false,
     classes: {
       "ui-dialog": "modalPluri"
@@ -17,21 +17,23 @@ const ModalAnaliseCSV = () => {
     modal: true,
     show: 200,
     position: { my: "center top-120%", of: window },
+    open: () => functions.printDataCrossing(),
     buttons: [
       {
-        id: 'btnConfirmAnalysisCSV',
+        id: 'btnConfirm',
         text: "Ok",
         prepend: `<span class='ui-icon ui-icon-circle-b-check'></span>`,
         click: function () {
           $(this).dialog("close");
-          $("#cruzData").dialog("open");
+          //proximoModal.dialog("open");
+          functions.execute();
         }
       },
       {
         text: "Voltar",
         prepend: `<span class='ui-icon ui-icon-arrowreturn-1-w'></span>`,
         click: function () {
-          $('#baseDados').dialog('open');
+          $('#analiseCSV').dialog('open');
           $(this).dialog("close");
         }
       },
@@ -47,4 +49,4 @@ const ModalAnaliseCSV = () => {
   });
 }
 
-export default ModalAnaliseCSV;
+export default ModalCruzamentoDados;

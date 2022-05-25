@@ -4,6 +4,9 @@ let dynamicFields = [];
 let CSVData = [];
 let CSVHeaders = [];
 
+let selectedModel = {};
+let CSVFileName = '';
+
 export const getURLExtensao = () => chrome.runtime.getURL("js/injector.js").toString.replace("js/injector.js", '');
 
 const fillSelect = (select) => {
@@ -127,8 +130,9 @@ export const docAnalysis = (protocolo) => {
 }
 
 const fillModelAnalysis = (matches, selectedDoc) => {
-  
-  dynamicFields = matches;
+
+  selectedModel = selectedDoc;
+  dynamicFields = matches.map((field) => field.toLocaleLowerCase().trim());
 
   $('#analiseDocModelo').append(`<div id='fieldList'></div>`)
   $('#fieldList').append(`<p class="textAnalysis"><span class='ui-icon ui-icon-arrow-r'></span> Docuemento: ${selectedDoc.nome}</p>`)
@@ -166,8 +170,9 @@ export const CSVAnalysis = (file) => {
 
 const fillCSVAnalysis = (parseData, filename) => {
 
+  CSVFileName = filename;
   CSVData = parseData.data;
-  CSVHeaders = Object.keys(CSVData[0]);
+  CSVHeaders = Object.keys(CSVData[0]).map((header) => header.toLocaleLowerCase().trim());
 
   $('#analiseCSV').append(`<div id='fieldListCSV'></div>`)
   $('#fieldListCSV').append(`<p class="textAnalysis"><span class='ui-icon ui-icon-arrow-r'></span> Arquivo: ${filename}</p>`)
@@ -184,4 +189,131 @@ const fillCSVAnalysis = (parseData, filename) => {
   } else {
     $('#fieldListCSV').append(`<small class="noFieldsError">Não foi identificado nenhum cabeçalho no arquivo enviado. Verifique se a planilha não está vazia.</small>`)
   }
+}
+
+export const printDataCrossing = () => {
+  $('#divTableDataCrossing').remove();
+  $('#cruzData .noFieldsError').remove();
+
+  const cleanFields = dynamicFields.map((field) => field.replaceAll('#', ''))
+  const dataCrossing = []
+  CSVHeaders.forEach((header) => {
+    try {
+      const matchedDynamicField = cleanFields.find((field) => field === header);
+      if (matchedDynamicField)
+        dataCrossing.push(header)
+    } catch {
+      return
+    }
+  })
+
+  if (!dataCrossing[0]) {
+    $('#cruzData').append(`
+    <small class="noFieldsError">Não existe correspondência no arquivo CSV informado!</small>
+    `)
+  } else {
+
+    let tbody = '';
+    let selectData = ''
+    dataCrossing.forEach((data) => {
+      const line = `
+          <tr>
+            <td>${data}</td>
+            <td id="arrow-data-crossing"><span class='ui-icon ui-icon-arrow-1-e'></span></td>
+            <td>##${data}##</td>
+          </tr>
+          `;
+      selectData += `<option>${data}</option>`
+      tbody += line;
+    })
+
+
+
+    $('#cruzData').append(`
+      <div id="divTableDataCrossing">
+        <table id="tableDataCrossing">
+          <thead>
+            <th>${CSVFileName}</th>
+            <th></th>
+            <th>${selectedModel.nome}</th>
+          </thead>
+          <tbody>
+            ${tbody}
+          </tbody>
+        </table>
+        <hr style="all:revert">
+        <div>
+          <p>Nome do documento na árvore de processos*</p>
+          <select>${selectData}</select>
+          <small>*Alguns documentos possuem a propriedade <b>Número</b> que quando preenchida exibe o valor na árvore de processos logo após o tipo. Exemplo: Anexo Contrato (Anexo = tipo e Contrato=Número)</small>
+        </div>
+        <hr style="all:revert">
+        <div id="checkDeleteModel">
+          <input type="checkbox" checked>
+          <p id="labelCheckDeleteModel">Excluir Documento Modelo após procedimento</p>
+        </div>
+      </div>
+    `)
+
+  }
+}
+
+export const execute = () => {
+  const urlNewDoc = $('#ifrVisualizacao').contents().find("img[title='Incluir Documento'").parent().attr('href');
+
+  $.get(urlNewDoc).done((htmlChooseDocType) => {
+    //console.log(htmlChooseDocType)
+    const urlExpandDocList = $(htmlChooseDocType).find('#frmDocumentoEscolherTipo').attr('action')
+    $.ajax({
+      method: 'POST',
+      url: urlExpandDocList,
+      data: { hdnFiltroSerie: 'T' }
+    }).done((htmlExpandedDocList) => {
+
+      const htmlTypeList = $(htmlExpandedDocList).find('.ancoraOpcao')
+
+      let typeList = []
+      for (let i = 0; i < htmlTypeList.length; i++) {
+        typeList.push({
+          nome: htmlTypeList[i].textContent,
+          url: htmlTypeList[i].getAttribute("href")
+        })
+      }
+
+      let matchedType = {};
+      typeList.some((type) => {
+        if (selectedModel.nome.startsWith(type.nome)) {
+          matchedType = type;
+          return true;
+        }
+      })
+
+
+      $.get(matchedType.url).done((htmlFormNewDoc) => {
+
+        const urlConfirmDocData = $(htmlFormNewDoc).find('#frmDocumentoCadastro').attr('action');
+
+        
+
+        $.ajax({
+          method: 'POST',
+          url: urlConfirmDocData,
+          data: {
+            rdoNivelAcesso: 0,
+            //txtNumero: "Nome na árvore",
+            txtProtocoloDocumentoTextoBase: selectedModel.numero,
+          }
+        }).done((html) => {
+          console.log(html)
+
+
+
+        })
+
+
+
+
+      })
+    })
+  })
 }

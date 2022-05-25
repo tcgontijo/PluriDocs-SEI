@@ -2,6 +2,11 @@
   "manifest_version": 3,
   "name": "PluriDocs - SEI!",
   "version": "1.0",
+  "icons": {
+    "16": "src/icons/logo-16.png",
+    "48": "src/icons/logo-48.png",
+    "128": "src/icons/logo-128.png"
+  },
   "content_scripts": [
     {
       "js": [

@@ -3,6 +3,7 @@ import ModalSelecaoDoc from "../components/ModalSelecaoDoc.js"
 import ModalAnaliseModelo from "../components/ModalAnaliseModelo.js"
 import ModalSelecaoBaseDados from "../components/ModalSelecaoBaseDados.js"
 import ModalAnaliseCSV from "../components/ModalAnaliseCSV.js"
+import ModalCruzamentoDados from "../components/ModalCruzamentoDados.js"
 
 
 BotaoMock();
@@ -20,4 +21,4 @@ ModalSelecaoBaseDados();
 ModalAnaliseCSV();
 
 //MODAL 05: Cruzamento de dados entre os campos dinâmicos do documento modelo e os cabeçalhos da base de dados 
-
+ModalCruzamentoDados();

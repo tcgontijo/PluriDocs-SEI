@@ -16,6 +16,7 @@ const ModalAnaliseDocModelo = () => {
     width: 600,
     modal: true,
     show: 200,
+    position: { my: "center top-120%", of: window },
     buttons: [
       {
         id: 'btnConfirmAnalysis',
