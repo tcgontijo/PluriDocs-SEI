@@ -28,13 +28,20 @@ const ModalSelecaoDoc = () => {
         text: "Ok",
         prepend: `<span class='ui-icon ui-icon-circle-b-check'></span>`,
         click: function () {
-          /* Isola o número do documento a partir do nome */
-          const selected = $(this).find('select').val().trim()
-          const nrDoc = selected.substring(selected.lastIndexOf(' '), selected.length).match(/\d+/i)[0];
-          functions.docAnalysis(nrDoc);
-          $('#analiseDocModelo').dialog('open');
-          $(this).dialog("close");
+
+          if ($(this).find('small')[0]) {
+            $(this).dialog("close");
+            functions.clearInputs();
+          } else {
+            /* Isola o número do documento a partir do nome */
+            const selected = $(this).find('select').val().trim()
+            const nrDoc = selected.substring(selected.lastIndexOf(' '), selected.length).match(/\d+/i)[0];
+            functions.docAnalysis(nrDoc);
+            $('#analiseDocModelo').dialog('open');
+            $(this).dialog("close");
+          }
         }
+
       },
       {
         text: "Cancelar",

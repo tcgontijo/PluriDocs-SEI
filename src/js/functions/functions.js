@@ -1,5 +1,4 @@
 let dataDocs = [];
-let urlLocal = '';
 let dynamicFields = [];
 let CSVData = [];
 let CSVHeaders = [];
@@ -7,17 +6,23 @@ let CSVHeaders = [];
 let selectedModel = {};
 let CSVFileName = '';
 
-export const getURLExtensao = () => chrome.runtime.getURL("js/injector.js").toString.replace("js/injector.js", '');
+// export const getURLExtensao = () => chrome.runtime.getURL("js/injector.js").toString.replace("js/injector.js", '');
 
 const fillSelect = (select) => {
   let resultado = '';
+  let contadorDocsValidos = 0;
   dataDocs.forEach((doc) => {
-    if (doc.cancelado || doc.externo)
+    if (doc.cancelado || doc.externo || !doc.src)
       resultado += `<option value="${doc.nome}" disabled title="Documento externo, cancelado ou e-mail">${doc.nome} </option>`
-    else
-      resultado += `<option value="${doc.nome}">${doc.nome}</option>`
+    else {
+      resultado += `<option value="${doc.nome}">${doc.nome}</option>`;
+      contadorDocsValidos++;
+    }
   })
-  select.removeAttr('disabled');
+  if (contadorDocsValidos === 0) {
+    select.after(`<small class="noFieldsError">Não há documentos válidos para reprodução no processo<small>`);
+  } else
+    select.removeAttr('disabled');
   select.children().remove();
   select.append(resultado);
 }
@@ -25,84 +30,81 @@ const fillSelect = (select) => {
 export const getDocsArvore = () => {
 
   const select = $('#docModelo select');
+  $('#docModelo small').remove();
 
-  if (window.location.href === urlLocal) {
-    fillSelect(select)
-    $("#btnSelecaoDoc").prop('disabled', false).removeClass('ui-button-disabled ui-state-disabled')
-  } else {
-    dataDocs = [];
+  dataDocs = [];
 
-    /* Loader de busca de documentos na árvore */
-    select.children().remove();
-    select.attr('disabled', 'disabled')
-    let loadingText = 'Buscando documentos ';
-    let counter = 0;
+  /* Loader de busca de documentos na árvore */
+  select.children().remove();
+  select.attr('disabled', 'disabled')
+  let loadingText = 'Buscando documentos ';
+  let counter = 0;
 
-    select.append(`<option><span class="spin">${loadingText}</span></option>`)
-    const addSymbol = () => {
-      if (counter < 3) {
-        loadingText += '🔍'
-        counter++;
-      }
-      else {
-        loadingText = 'Buscando documentos ';
-        counter = 0;
-      }
-      select.find('option').text(loadingText);
+  select.append(`<option><span class="spin">${loadingText}</span></option>`)
+  const addSymbol = () => {
+    if (counter < 3) {
+      loadingText += '🔍'
+      counter++;
     }
-    const loadingInteval = setInterval(addSymbol, 200)
-
-    /* Verifica se existe o botão (+) para expandir pastas na árvore */
-    const urlBtnExpandirPastas = $("#ifrArvore").contents().find("[id^='anchorAP']").attr('href');
-    const urlArvore = $("#ifrArvore").attr('src');
-
-    const urlBusca = urlBtnExpandirPastas ? urlBtnExpandirPastas : urlArvore;
-
-
-    $.get(urlBusca).done((htmlArvore) => {
-      const lines = htmlArvore.split('\n');
-      const pattern1 = /^Nos\[\d{1,}\] = new infraArvoreNo\("DOCUMENTO/i;
-      const pattern2 = /^Nos\[\d{1,}\]\.src = 'controlador/
-
-      lines.forEach((line) => {
-        if (pattern1.test(line)) {
-          const nrNo = line.substring(1, line.indexOf(']')).match(/\d{1,}/)[0];
-          const props = line.slice(line.indexOf('(') + 1, line.lastIndexOf(')')).replaceAll(`"`, ``).replaceAll(`\\\\`).split(',');
-
-          if (props[17])//documentos com vírgula têm quebra de linha por conta do split. Esta condição concatena as linhas quebradas
-            dataDocs.push({
-              nrNo,
-              nome: `${props[5]},${props[6]}`,
-              numero: props[17],
-              cancelado: props[7].startsWith('Documento Cancelado') ? true : false,
-              externo: props[9].includes('documento_interno') ? false : true
-            });
-          else
-            dataDocs.push({
-              nrNo,
-              nome: props[5],
-              numero: props[15],
-              cancelado: props[6].startsWith('Documento Cancelado') ? true : false,
-              externo: props[9].includes('documento_interno') ? false : true
-            });
-        }
-      })
-      //Percorre o array novamente em busca dos links diretos para os documentos
-      lines.forEach((line) => {
-        if (pattern2.test(line)) {
-          const nrNo = line.substring(1, line.indexOf(']')).match(/\d{1,}/)[0];
-          const src = line.substring(line.indexOf(`'`) + 1, line.lastIndexOf(`'`))
-          const docMatched = dataDocs.find((dataDoc) => dataDoc.nrNo === nrNo);
-          dataDocs[dataDocs.indexOf(docMatched)] = { ...docMatched, src };
-        }
-      })
-
-      fillSelect(select);
-      clearInterval(loadingInteval);
-
-    }).then(() => $("#btnSelecaoDoc").prop('disabled', false).removeClass('ui-button-disabled ui-state-disabled'))
-    urlLocal = window.location.href;
+    else {
+      loadingText = 'Buscando documentos ';
+      counter = 0;
+    }
+    select.find('option').text(loadingText);
   }
+  const loadingInteval = setInterval(addSymbol, 200)
+
+  /* Verifica se existe o botão (+) para expandir pastas na árvore */
+  const urlBtnExpandirPastas = $("#ifrArvore").contents().find("[id^='anchorAP']").attr('href');
+  const urlArvore = $("#ifrArvore").attr('src');
+
+  const urlBusca = urlBtnExpandirPastas ? urlBtnExpandirPastas : urlArvore;
+
+
+  $.get(urlBusca).done((htmlArvore) => {
+    const lines = htmlArvore.split('\n');
+    const pattern1 = /^Nos\[\d{1,}\] = new infraArvoreNo\("DOCUMENTO/i;
+    const pattern2 = /^Nos\[\d{1,}\]\.src = 'controlador/
+
+    lines.forEach((line) => {
+      if (pattern1.test(line)) {
+        const nrNo = line.substring(1, line.indexOf(']')).match(/\d{1,}/)[0];
+        const props = line.slice(line.indexOf('(') + 1, line.lastIndexOf(')')).replaceAll(`"`, ``).replaceAll(`\\\\`).split(',');
+
+        if (props[17])//documentos com vírgula têm quebra de linha por conta do split. Esta condição concatena as linhas quebradas
+          dataDocs.push({
+            nrNo,
+            nome: `${props[5]},${props[6]}`,
+            numero: props[17],
+            cancelado: props[7].startsWith('Documento Cancelado') ? true : false,
+            externo: props[9].includes('documento_interno') ? false : true
+          });
+        else
+          dataDocs.push({
+            nrNo,
+            nome: props[5],
+            numero: props[15],
+            cancelado: props[6].startsWith('Documento Cancelado') ? true : false,
+            externo: props[9].includes('documento_interno') ? false : true
+          });
+      }
+    })
+    //Percorre o array novamente em busca dos links diretos para os documentos
+    lines.forEach((line) => {
+      if (pattern2.test(line)) {
+        const nrNo = line.substring(1, line.indexOf(']')).match(/\d{1,}/)[0];
+        const src = line.substring(line.indexOf(`'`) + 1, line.lastIndexOf(`'`))
+        const docMatched = dataDocs.find((dataDoc) => dataDoc.nrNo === nrNo);
+        dataDocs[dataDocs.indexOf(docMatched)] = { ...docMatched, src };
+      }
+    })
+
+    fillSelect(select);
+    clearInterval(loadingInteval);
+
+  }).then(() => $("#btnSelecaoDoc").prop('disabled', false).removeClass('ui-button-disabled ui-state-disabled'))
+
+
 }
 
 export const clearInputs = () => $('.ui-dialog input').each(function () { $(this).val('') })
@@ -262,7 +264,6 @@ export const execute = () => {
   const urlNewDoc = $('#ifrVisualizacao').contents().find("img[title='Incluir Documento'").parent().attr('href');
 
   $.get(urlNewDoc).done((htmlChooseDocType) => {
-    //console.log(htmlChooseDocType)
     const urlExpandDocList = $(htmlChooseDocType).find('#frmDocumentoEscolherTipo').attr('action')
     $.ajax({
       method: 'POST',
@@ -280,40 +281,110 @@ export const execute = () => {
         })
       }
 
-      let matchedType = {};
+      let urlFormNewDoc = '';
       typeList.some((type) => {
         if (selectedModel.nome.startsWith(type.nome)) {
-          matchedType = type;
+          urlFormNewDoc = type.url;
           return true;
         }
       })
 
 
-      $.get(matchedType.url).done((htmlFormNewDoc) => {
+      $.get(urlFormNewDoc).done((htmlFormNewDoc) => {
 
-        const urlConfirmDocData = $(htmlFormNewDoc).find('#frmDocumentoCadastro').attr('action');
+        const form = $(htmlFormNewDoc).find('#frmDocumentoCadastro')
+        const urlConfirmDocData = form.attr('action');
 
-        
+        let params = {};
+        form.find("input[type=hidden]").each(function () {
+          if ($(this).attr('name') && $(this).attr('id').includes('hdn')) {
+            params[$(this).attr('name')] = $(this).val();
+          }
+        });
+        form.find('input[type=text]').each(function () {
+          if ($(this).attr('id') && $(this).attr('id').includes('txt')) {
+            params[$(this).attr('id')] = $(this).val();
+          }
+        });
+        form.find('select').each(function () {
+          if ($(this).attr('id') && $(this).attr('id').includes('sel')) {
+            params[$(this).attr('id')] = $(this).val();
+          }
+        });
+        form.find('input[type=radio]').each(function () {
+          if ($(this).attr('name') && $(this).attr('name').includes('rdo')) {
+            params[$(this).attr('name')] = $(this).val();
+          }
+        });
+        params.rdoNivelAcesso = '0';
+        params.hdnFlagDocumentoCadastro = '2';
+        params.txaObservacoes = '';
+        params.txtDescricao = '';
+        params.txtProtocoloDocumentoTextoBase = selectedModel.numero;
+
+        // var postData = '';
+        // for (var k in param) {
+        //   if (postData !== '') postData = postData + '&';
+        //   var valor = (k == 'hdnAssuntos') ? param[k] : param[k]//escapeComponent(param[k]);
+        //   valor = (k == 'txtDataElaboracao') ? param[k] : param[k]//escapeComponent(param[k]);
+        //   valor = (k == 'hdnInteressados') ? param[k] : valor;
+        //   valor = (k == 'txtDescricao') ? valor : valor; //parent.encodeURI_toHex(param[k].normalize('NFC'))
+        //   valor = (k == 'txtNumero') ? valor : valor; //escapeComponent(param[k])
+        //   postData = postData + k + '=' + valor;
+        // }
+
 
         $.ajax({
           method: 'POST',
           url: urlConfirmDocData,
-          data: {
-            rdoNivelAcesso: 0,
-            //txtNumero: "Nome na árvore",
-            txtProtocoloDocumentoTextoBase: selectedModel.numero,
-          }
-        }).done((html) => {
-          console.log(html)
+          data: params
+        }).done((htmlDocCreated) => {
+          const lines = htmlDocCreated.split('\n');
+          const urlEditor = lines.filter((line) => line.includes(`if ('controlador.php?acao=editor_montar`))[0].match(/'(.+)'!/)[1];
 
 
+          $.get(urlEditor).done((htmlEditor) => {
 
+            const urlSubmitForm = $(htmlEditor).filter((_, el) => $(el).attr('id') === 'frmEditor').attr('action');
+
+            console.log("😎 👉 urlSubmitForm:::: \n", urlSubmitForm);
+
+            const textAreas = $(htmlEditor).find('div#divEditores textarea');
+
+            const textAreasReplaced = textAreas.map((_, el) => {
+              return el.innerHTML.replaceAll('##nome##', 'Tulio Cesar Gontijo').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+            });
+
+            console.log("😎 👉 textAreasReplaced", textAreasReplaced);
+
+            let params = {};
+
+            textAreasReplaced.each((i, textArea) => {
+              params[$(textAreas).eq(i).attr('name')] = textArea;
+            });
+
+            //console.log(params);
+
+            $(htmlEditor).find('input[type=hidden').each((_, input) => {
+              //console.log(input, typeof input);
+              params[$(input).attr('name')] = $(input).val();
+            })
+
+            console.log(params);
+
+
+            $.ajax({
+              method: 'POST',
+              contentType: 'application/x-www-form-urlencoded; charset=ISO-8859-1',
+              url: urlSubmitForm,
+              data: params
+            }).done((htmlConfirmDoc) => {
+              console.log(htmlConfirmDoc)
+            })
+          })
         })
-
-
-
-
       })
     })
   })
 }
+

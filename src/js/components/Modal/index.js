@@ -1,3 +1,5 @@
+import * as functions from '../functions/functions.js'
+
 const Modal = ({
   appentTo,
   children,
