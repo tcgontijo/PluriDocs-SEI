@@ -1,7 +1,10 @@
+import specialChars from '../util/specialChars.js';
+
 let dataDocs = [];
 let dynamicFields = [];
 let CSVData = [];
 let CSVHeaders = [];
+let dataCrossing = []
 
 let selectedModel = {};
 let CSVFileName = '';
@@ -197,8 +200,9 @@ export const printDataCrossing = () => {
   $('#divTableDataCrossing').remove();
   $('#cruzData .noFieldsError').remove();
 
+  dataCrossing = [];
+
   const cleanFields = dynamicFields.map((field) => field.replaceAll('#', ''))
-  const dataCrossing = []
   CSVHeaders.forEach((header) => {
     try {
       const matchedDynamicField = cleanFields.find((field) => field === header);
@@ -263,128 +267,136 @@ export const printDataCrossing = () => {
 export const execute = () => {
   const urlNewDoc = $('#ifrVisualizacao').contents().find("img[title='Incluir Documento'").parent().attr('href');
 
-  $.get(urlNewDoc).done((htmlChooseDocType) => {
-    const urlExpandDocList = $(htmlChooseDocType).find('#frmDocumentoEscolherTipo').attr('action')
-    $.ajax({
-      method: 'POST',
-      url: urlExpandDocList,
-      data: { hdnFiltroSerie: 'T' }
-    }).done((htmlExpandedDocList) => {
 
-      const htmlTypeList = $(htmlExpandedDocList).find('.ancoraOpcao')
+  CSVData.forEach((CSVRegister, i, array) => {
+    //for (let i = 0; i < CSVData.length; i++) {
 
-      let typeList = []
-      for (let i = 0; i < htmlTypeList.length; i++) {
-        typeList.push({
-          nome: htmlTypeList[i].textContent,
-          url: htmlTypeList[i].getAttribute("href")
-        })
-      }
 
-      let urlFormNewDoc = '';
-      typeList.some((type) => {
-        if (selectedModel.nome.startsWith(type.nome)) {
-          urlFormNewDoc = type.url;
-          return true;
+    $.get(urlNewDoc).done((htmlChooseDocType) => {
+      const urlExpandDocList = $(htmlChooseDocType).find('#frmDocumentoEscolherTipo').attr('action')
+      $.ajax({
+        method: 'POST',
+        url: urlExpandDocList,
+        data: { hdnFiltroSerie: 'T' }
+      }).done((htmlExpandedDocList) => {
+
+        const htmlTypeList = $(htmlExpandedDocList).find('.ancoraOpcao')
+
+        let typeList = []
+        for (let i = 0; i < htmlTypeList.length; i++) {
+          typeList.push({
+            nome: htmlTypeList[i].textContent,
+            url: htmlTypeList[i].getAttribute("href")
+          })
         }
-      })
 
-
-      $.get(urlFormNewDoc).done((htmlFormNewDoc) => {
-
-        const form = $(htmlFormNewDoc).find('#frmDocumentoCadastro')
-        const urlConfirmDocData = form.attr('action');
-
-        let params = {};
-        form.find("input[type=hidden]").each(function () {
-          if ($(this).attr('name') && $(this).attr('id').includes('hdn')) {
-            params[$(this).attr('name')] = $(this).val();
+        let urlFormNewDoc = '';
+        typeList.some((type) => {
+          if (selectedModel.nome.startsWith(type.nome)) {
+            urlFormNewDoc = type.url;
+            return true;
           }
-        });
-        form.find('input[type=text]').each(function () {
-          if ($(this).attr('id') && $(this).attr('id').includes('txt')) {
-            params[$(this).attr('id')] = $(this).val();
-          }
-        });
-        form.find('select').each(function () {
-          if ($(this).attr('id') && $(this).attr('id').includes('sel')) {
-            params[$(this).attr('id')] = $(this).val();
-          }
-        });
-        form.find('input[type=radio]').each(function () {
-          if ($(this).attr('name') && $(this).attr('name').includes('rdo')) {
-            params[$(this).attr('name')] = $(this).val();
-          }
-        });
-        params.rdoNivelAcesso = '0';
-        params.hdnFlagDocumentoCadastro = '2';
-        params.txaObservacoes = '';
-        params.txtDescricao = '';
-        params.txtProtocoloDocumentoTextoBase = selectedModel.numero;
-
-        // var postData = '';
-        // for (var k in param) {
-        //   if (postData !== '') postData = postData + '&';
-        //   var valor = (k == 'hdnAssuntos') ? param[k] : param[k]//escapeComponent(param[k]);
-        //   valor = (k == 'txtDataElaboracao') ? param[k] : param[k]//escapeComponent(param[k]);
-        //   valor = (k == 'hdnInteressados') ? param[k] : valor;
-        //   valor = (k == 'txtDescricao') ? valor : valor; //parent.encodeURI_toHex(param[k].normalize('NFC'))
-        //   valor = (k == 'txtNumero') ? valor : valor; //escapeComponent(param[k])
-        //   postData = postData + k + '=' + valor;
-        // }
+        })
 
 
-        $.ajax({
-          method: 'POST',
-          url: urlConfirmDocData,
-          data: params
-        }).done((htmlDocCreated) => {
-          const lines = htmlDocCreated.split('\n');
-          const urlEditor = lines.filter((line) => line.includes(`if ('controlador.php?acao=editor_montar`))[0].match(/'(.+)'!/)[1];
+        $.get(urlFormNewDoc).done((htmlFormNewDoc) => {
+
+          const form = $(htmlFormNewDoc).find('#frmDocumentoCadastro')
+          const urlConfirmDocData = form.attr('action');
+
+          let params = {};
+          form.find("input[type=hidden]").each(function () {
+            if ($(this).attr('name') && $(this).attr('id').includes('hdn')) {
+              params[$(this).attr('name')] = $(this).val();
+            }
+          });
+          form.find('input[type=text]').each(function () {
+            if ($(this).attr('id') && $(this).attr('id').includes('txt')) {
+              params[$(this).attr('id')] = $(this).val();
+            }
+          });
+          form.find('select').each(function () {
+            if ($(this).attr('id') && $(this).attr('id').includes('sel')) {
+              params[$(this).attr('id')] = $(this).val();
+            }
+          });
+          form.find('input[type=radio]').each(function () {
+            if ($(this).attr('name') && $(this).attr('name').includes('rdo')) {
+              params[$(this).attr('name')] = $(this).val();
+            }
+          });
+          params.rdoNivelAcesso = '0';
+          params.hdnFlagDocumentoCadastro = '2';
+          params.txaObservacoes = '';
+          params.txtDescricao = '';
+          params.txtProtocoloDocumentoTextoBase = selectedModel.numero;
+          //params.txtNumero = CSVRegister[dataCrossing[0]]
 
 
-          $.get(urlEditor).done((htmlEditor) => {
-
-            const urlSubmitForm = $(htmlEditor).filter((_, el) => $(el).attr('id') === 'frmEditor').attr('action');
-
-            console.log("😎 👉 urlSubmitForm:::: \n", urlSubmitForm);
-
-            const textAreas = $(htmlEditor).find('div#divEditores textarea');
-
-            const textAreasReplaced = textAreas.map((_, el) => {
-              return el.innerHTML.replaceAll('##nome##', 'Tulio Cesar Gontijo').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-            });
-
-            console.log("😎 👉 textAreasReplaced", textAreasReplaced);
-
-            let params = {};
-
-            textAreasReplaced.each((i, textArea) => {
-              params[$(textAreas).eq(i).attr('name')] = textArea;
-            });
-
-            //console.log(params);
-
-            $(htmlEditor).find('input[type=hidden').each((_, input) => {
-              //console.log(input, typeof input);
-              params[$(input).attr('name')] = $(input).val();
-            })
-
-            console.log(params);
+          $.ajax({
+            method: 'POST',
+            url: urlConfirmDocData,
+            data: params
+          }).done((htmlDocCreated) => {
+            const lines = htmlDocCreated.split('\n');
+            const urlEditor = lines.filter((line) => line.includes(`if ('controlador.php?acao=editor_montar`))[0].match(/'(.+)'!/)[1];
 
 
-            $.ajax({
-              method: 'POST',
-              contentType: 'application/x-www-form-urlencoded; charset=ISO-8859-1',
-              url: urlSubmitForm,
-              data: params
-            }).done((htmlConfirmDoc) => {
-              console.log(htmlConfirmDoc)
+            $.get(urlEditor).done((htmlEditor) => {
+
+              const urlSubmitForm = $(htmlEditor).filter((_, el) => $(el).attr('id') === 'frmEditor').attr('action');
+
+              const textAreas = $(htmlEditor).find('div#divEditores textarea');
+
+              const regex1 = new RegExp(dataCrossing.map((data) => `##${data}##`).join('|'), 'g');
+              const regex2 = new RegExp(Object.keys(specialChars).join('|'), 'g');
+
+              console.log('specialChars -> ', Object.keys(specialChars).join(''));
+
+              const textAreasReplaced = textAreas.map((_, el) => $(el).text()
+                .replace(regex1, (match) => CSVRegister[match.substring(2, match.length - 2)])
+                .replace(regex2, (match) => specialChars[match]));
+
+
+              let params = {};
+
+              textAreasReplaced.each((i, textArea) => {
+                params[$(textAreas).eq(i).attr('name')] = textArea;
+              });
+
+
+              $(htmlEditor).find('input[type=hidden').each((_, input) => {
+                params[$(input).attr('name')] = $(input).val();
+              })
+
+              console.log(params);
+
+
+              $.ajax({
+                method: 'POST',
+                url: urlSubmitForm,
+                contentType: 'application/x-www-form-urlencoded; charset=ISO-8959-1',//
+                beforeSend: function (jqXHR) {
+                  jqXHR.overrideMimeType('text/html;charset=iso-8859-1');
+                },
+                data: params
+              }).done((htmlConfirmDoc) => {
+                console.log(`${i + 1}/${array.length}`);
+                $('#ifrArvore').contents().find('#divArvore div').append("`${i + 1}/${array.length}`")
+                if (i === array.length - 1)
+                  $('#ifrArvore').attr('src', (_, src) => src)
+              })
             })
           })
         })
       })
     })
+
+
+
   })
+  //})
+
+
 }
 
