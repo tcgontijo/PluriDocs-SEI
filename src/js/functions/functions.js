@@ -8,6 +8,11 @@ let dataCrossing = []
 
 let selectedModel = {};
 let CSVFileName = '';
+let docsNames = '';
+
+let aborted = false;
+
+let ajax1 = null;
 
 // export const getURLExtensao = () => chrome.runtime.getURL("js/injector.js").toString.replace("js/injector.js", '');
 
@@ -16,7 +21,7 @@ const fillSelect = (select) => {
   let contadorDocsValidos = 0;
   dataDocs.forEach((doc) => {
     if (doc.cancelado || doc.externo || !doc.src)
-      resultado += `<option value="${doc.nome}" disabled title="Documento externo, cancelado ou e-mail">${doc.nome} </option>`
+      resultado += `<option value="${doc.nome}" disabled title="Documento não válido para replicação em lote">${doc.nome}</option>`
     else {
       resultado += `<option value="${doc.nome}">${doc.nome}</option>`;
       contadorDocsValidos++;
@@ -126,8 +131,7 @@ export const docAnalysis = (protocolo) => {
 
   $.get(selectedDoc.src).done((contentDoc) => {
     const body = contentDoc.substring(contentDoc.indexOf('<body>'), contentDoc.lastIndexOf('</body>'))
-    const matches = Array.from(new Set(body.match(/##.+##/gmi)));//rearranjo para remover duplicatas
-    //const pureFields = matches.map((word) => word.replaceAll('#', ''))
+    const matches = Array.from(new Set(body.match(/##.+?##/gm)));//rearranjo para remover duplicatas
     fillModelAnalysis(matches, selectedDoc);
   }).then(() => {
     $("#loaderAnalysis").remove();
@@ -137,7 +141,7 @@ export const docAnalysis = (protocolo) => {
 const fillModelAnalysis = (matches, selectedDoc) => {
 
   selectedModel = selectedDoc;
-  dynamicFields = matches.map((field) => field.toLocaleLowerCase().trim());
+  dynamicFields = matches.map((field) => field.trim());
 
   $('#analiseDocModelo').append(`<div id='fieldList'></div>`)
   $('#fieldList').append(`<p class="textAnalysis"><span class='ui-icon ui-icon-arrow-r'></span> Docuemento: ${selectedDoc.nome}</p>`)
@@ -166,6 +170,7 @@ export const CSVAnalysis = (file) => {
   Papa.parse(file, {
     header: true,
     skipEmptyLines: true,
+    encoding: "UTF-8",
     complete: (results) => {
       fillCSVAnalysis(results, file.name);
     }
@@ -177,7 +182,8 @@ const fillCSVAnalysis = (parseData, filename) => {
 
   CSVFileName = filename;
   CSVData = parseData.data;
-  CSVHeaders = Object.keys(CSVData[0]).map((header) => header.toLocaleLowerCase().trim());
+
+  CSVHeaders = Object.keys(CSVData[0]);
 
   $('#analiseCSV').append(`<div id='fieldListCSV'></div>`)
   $('#fieldListCSV').append(`<p class="textAnalysis"><span class='ui-icon ui-icon-arrow-r'></span> Arquivo: ${filename}</p>`)
@@ -202,7 +208,7 @@ export const printDataCrossing = () => {
 
   dataCrossing = [];
 
-  const cleanFields = dynamicFields.map((field) => field.replaceAll('#', ''))
+  const cleanFields = dynamicFields.map((field) => field.replaceAll('#', ''));//.toLocaleLowerCase())
   CSVHeaders.forEach((header) => {
     try {
       const matchedDynamicField = cleanFields.find((field) => field === header);
@@ -220,7 +226,7 @@ export const printDataCrossing = () => {
   } else {
 
     let tbody = '';
-    let selectData = ''
+    let selectData = '';
     dataCrossing.forEach((data) => {
       const line = `
           <tr>
@@ -247,38 +253,42 @@ export const printDataCrossing = () => {
             ${tbody}
           </tbody>
         </table>
-        <hr style="all:revert">
-        <div>
-          <p>Nome do documento na árvore de processos*</p>
-          <select>${selectData}</select>
-          <small>*Alguns documentos possuem a propriedade <b>Número</b> que quando preenchida exibe o valor na árvore de processos logo após o tipo. Exemplo: Anexo Contrato (Anexo = tipo e Contrato=Número)</small>
-        </div>
-        <hr style="all:revert">
-        <div id="checkDeleteModel">
-          <input type="checkbox" checked>
-          <p id="labelCheckDeleteModel">Excluir Documento Modelo após procedimento</p>
-        </div>
+    
+      <hr style="all:revert">
+      <div>
+        <p>Nome do documento na árvore de processos*</p>
+        <select id="nomesDoc">${selectData}</select>
+        <small>*Alguns documentos possuem a propriedade <b>Número</b> que quando preenchida exibe o valor na árvore de processos logo após o tipo. Exemplo: Anexo Contrato (Anexo = tipo e Contrato=Número)</small>
       </div>
-    `)
+      </div>
+      `)
+    // <hr style="all:revert">
+    // <div id="checkDeleteModel">
+    //   <input type="checkbox" checked>
+    //   <p id="labelCheckDeleteModel">Excluir Documento Modelo após procedimento</p>
+    // </div>
 
   }
+}
+
+export const getDocsNames = () => {
+  docsNames = $('#nomesDoc').val();
 }
 
 export const execute = () => {
   const urlNewDoc = $('#ifrVisualizacao').contents().find("img[title='Incluir Documento'").parent().attr('href');
 
+  let counter = 0;
 
-  CSVData.forEach((CSVRegister, i, array) => {
-    //for (let i = 0; i < CSVData.length; i++) {
+  for (let i = 0; i < CSVData.length; i++) {
 
-
-    $.get(urlNewDoc).done((htmlChooseDocType) => {
+    $.get(urlNewDoc).done(async (htmlChooseDocType) => {
       const urlExpandDocList = $(htmlChooseDocType).find('#frmDocumentoEscolherTipo').attr('action')
       $.ajax({
         method: 'POST',
         url: urlExpandDocList,
         data: { hdnFiltroSerie: 'T' }
-      }).done((htmlExpandedDocList) => {
+      }).done(async (htmlExpandedDocList) => {
 
         const htmlTypeList = $(htmlExpandedDocList).find('.ancoraOpcao')
 
@@ -299,10 +309,13 @@ export const execute = () => {
         })
 
 
-        $.get(urlFormNewDoc).done((htmlFormNewDoc) => {
+        $.get(urlFormNewDoc).done(async (htmlFormNewDoc) => {
 
           const form = $(htmlFormNewDoc).find('#frmDocumentoCadastro')
           const urlConfirmDocData = form.attr('action');
+
+          const numeroOpcional = form.find("#lblNumero").attr('class') === 'infraLabelOpcional';
+
 
           let params = {};
           form.find("input[type=hidden]").each(function () {
@@ -330,19 +343,19 @@ export const execute = () => {
           params.txaObservacoes = '';
           params.txtDescricao = '';
           params.txtProtocoloDocumentoTextoBase = selectedModel.numero;
-          //params.txtNumero = CSVRegister[dataCrossing[0]]
+          params.txtNumero = numeroOpcional ? '' : CSVData[i][docsNames]//CSVRegister[docsNames];
 
 
           $.ajax({
             method: 'POST',
             url: urlConfirmDocData,
             data: params
-          }).done((htmlDocCreated) => {
+          }).done(async (htmlDocCreated) => {
             const lines = htmlDocCreated.split('\n');
             const urlEditor = lines.filter((line) => line.includes(`if ('controlador.php?acao=editor_montar`))[0].match(/'(.+)'!/)[1];
 
 
-            $.get(urlEditor).done((htmlEditor) => {
+            $.get(urlEditor).done(async (htmlEditor) => {
 
               const urlSubmitForm = $(htmlEditor).filter((_, el) => $(el).attr('id') === 'frmEditor').attr('action');
 
@@ -351,11 +364,8 @@ export const execute = () => {
               const regex1 = new RegExp(dataCrossing.map((data) => `##${data}##`).join('|'), 'g');
               const regex2 = new RegExp(Object.keys(specialChars).join('|'), 'g');
 
-              console.log('specialChars -> ', Object.keys(specialChars).join(''));
 
-              const textAreasReplaced = textAreas.map((_, el) => $(el).text()
-                .replace(regex1, (match) => CSVRegister[match.substring(2, match.length - 2)])
-                .replace(regex2, (match) => specialChars[match]));
+              const textAreasReplaced = textAreas.map((_, el) => $(el).text().replace(regex1, (match) => CSVData[i][match.substring(2, match.length - 2)].replace(regex2, (match) => specialChars[match])))
 
 
               let params = {};
@@ -369,34 +379,45 @@ export const execute = () => {
                 params[$(input).attr('name')] = $(input).val();
               })
 
-              console.log(params);
-
 
               $.ajax({
                 method: 'POST',
                 url: urlSubmitForm,
-                contentType: 'application/x-www-form-urlencoded; charset=ISO-8959-1',//
-                beforeSend: function (jqXHR) {
-                  jqXHR.overrideMimeType('text/html;charset=iso-8859-1');
-                },
                 data: params
               }).done((htmlConfirmDoc) => {
-                console.log(`${i + 1}/${array.length}`);
-                $('#ifrArvore').contents().find('#divArvore div').append("`${i + 1}/${array.length}`")
-                if (i === array.length - 1)
-                  $('#ifrArvore').attr('src', (_, src) => src)
+
+                $('#progress').html(`<p style="text-align:center">${++counter}/${CSVData.length}</p>`);
+
+              }).then(() => {
+                if (counter === CSVData.length) {
+                  $('#ifrArvore').contents()[0].location.reload();
+                  setTimeout(() => {
+                    $('#cancelExecute').hide();
+                    $('#progress').html(`<p style="text-align:center">Reprodução em lote finalizada com sucesso!</p>`)
+                    setTimeout(() => {
+                      $('#execucao').dialog('close');
+                      $('#cancelExecute').show();
+                    }, 1500);
+                  }, 500)
+                }
               })
             })
           })
         })
       })
     })
+    if (aborted) break;
+    console.log("😎 👉 aborted -> ", aborted);
+  }
 
+  $('#progress').html(`<p style="text-align:center">Preparando ambiente</p>`)
 
+}
 
-  })
-  //})
+export const abortAjax = () => {
 
+  aborted = true;
 
+  $('#ifrArvore').contents()[0].location.reload();
 }
 

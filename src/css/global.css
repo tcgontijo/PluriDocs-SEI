@@ -34,6 +34,14 @@
     font-size: 30px !important;
 }
 
+.loader-execute {
+    display: block !important;
+    margin: auto !important;
+    font-size: 50px !important;
+    margin-top: 20px;
+
+}
+
 .textAnalysis {
     font-weight: bold !important;
     margin: 0 auto !important;

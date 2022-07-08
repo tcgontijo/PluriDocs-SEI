@@ -14,7 +14,7 @@ const ModalSelecaoDoc = () => {
     classes: {
       "ui-dialog": "modalPluri"
     },
-    position: { my: "center top-120%", of: window },
+    position: { my: "center top+30", at: "center top", of: window },
     width: 600,
     show: 100,
     modal: true,

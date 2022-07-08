@@ -17,7 +17,7 @@ const ModalSelecaoBaseDados = () => {
     width: 600,
     modal: true,
     show: 200,
-    position: { my: "center top-120%", of: window },
+    position: { my: "center top+30", at: "center top", of: window },
     buttons: [
       {
         id: 'btnEnviaCSV',

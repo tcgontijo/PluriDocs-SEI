@@ -16,7 +16,7 @@ const ModalCruzamentoDados = () => {
     width: 600,
     modal: true,
     show: 200,
-    position: { my: "center top-120%", of: window },
+    position: { my: "center top+30", at: "center top", of: window },
     open: () => functions.printDataCrossing(),
     buttons: [
       {
@@ -25,8 +25,10 @@ const ModalCruzamentoDados = () => {
         prepend: `<span class='ui-icon ui-icon-circle-b-check'></span>`,
         click: function () {
           $(this).dialog("close");
-          //proximoModal.dialog("open");
+          $('#execucao').dialog("open");
+          functions.getDocsNames();
           functions.execute();
+          functions.clearInputs();
         }
       },
       {

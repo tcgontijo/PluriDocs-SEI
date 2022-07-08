@@ -4,9 +4,13 @@ import ModalAnaliseModelo from "../components/ModalAnaliseModelo.js"
 import ModalSelecaoBaseDados from "../components/ModalSelecaoBaseDados.js"
 import ModalAnaliseCSV from "../components/ModalAnaliseCSV.js"
 import ModalCruzamentoDados from "../components/ModalCruzamentoDados.js"
+import ModalLoader from "../components/ModalLoader.js"
 
 
 BotaoMock();
+
+
+ModalLoader();
 
 //MODAL 01: Seleção do documento modelo na árvore do processo
 ModalSelecaoDoc();

@@ -4,6 +4,7 @@ const BotaoMock = () => {
 
   $('#trigger-modal').click(() => {
     $('#docModelo').dialog('open');
+    //$('#execucao').dialog('open');
   });
 };
 
