@@ -4,7 +4,7 @@ const ModalSelecaoBaseDados = () => {
   $('body').append(`
   <div id="baseDados" title="Base de dados">
   <p>Selecione um arquivo no formato CSV para servir como base de dados para a geração de documentos em lote:</p>
-  <input id="inputBD" type="file"></input>
+  <input id="inputBD" type="file" accept=".csv, text/csv"></input>
   </div>
   `)
 
@@ -17,7 +17,7 @@ const ModalSelecaoBaseDados = () => {
     width: 600,
     modal: true,
     show: 200,
-    position: { my: "center top+30", at: "center top", of: window },
+    position: { my: `center top+${functions.getSeiVersion().startsWith('4') ? "70" : "30"}`, at: "center top", of: window },
     buttons: [
       {
         id: 'btnEnviaCSV',
@@ -25,9 +25,15 @@ const ModalSelecaoBaseDados = () => {
         disabled: true,
         prepend: `<span class='ui-icon ui-icon-upload'></span>`,
         click: () => {
-          functions.CSVAnalysis($("#inputBD")[0].files[0]);
-          $('#analiseCSV').dialog('open');
-          $('#baseDados').dialog("close");
+          $('#baseDados small').remove();
+          const file = $("#inputBD")[0].files[0];
+          if (file.name.substring(file.name.lastIndexOf("."), file.name.length).toLocaleLowerCase().trim() === ".csv") {
+            functions.CSVAnalysis($("#inputBD")[0].files[0]);
+            $('#analiseCSV').dialog('open');
+            $('#baseDados').dialog("close");
+          } else {
+            $('#inputBD').after(`<small class="noFieldsError">Arquivo inválido! Selecione um documento no formato "CSV".</small>`)
+          }
         }
       },
       {
@@ -43,6 +49,7 @@ const ModalSelecaoBaseDados = () => {
         prepend: `<span class='ui-icon ui-icon-circle-b-close'></span>`,
         click: function () {
           $(this).dialog("close");
+          $('#baseDados small').remove();
           functions.clearInputs();
         }
       }

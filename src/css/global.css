@@ -24,6 +24,7 @@
 }
 
 .modalPluri select {
+    display: inline-block !important;
     padding: 6px 0px;
     width: 100%;
 }

@@ -33,7 +33,6 @@ const ModalLoader = () => {
         id: 'cancelExecute',
         prepend: `<span class='ui-icon ui-icon-circle-b-close'></span>`,
         click: function () {
-          $(this).dialog("close");
           functions.clearInputs();
           functions.abortAjax();
         }

@@ -1,6 +1,7 @@
 import * as functions from '../functions/functions.js'
 
 const ModalSelecaoDoc = () => {
+
   $('body').append(`
     <div id="docModelo" title="Documento modelo - Seleção">
       <p>Selecione abaixo, dentre os documentos constantes na árvore do processo, o modelo para reprodução em lote:</p>
@@ -14,13 +15,14 @@ const ModalSelecaoDoc = () => {
     classes: {
       "ui-dialog": "modalPluri"
     },
-    position: { my: "center top+30", at: "center top", of: window },
+    position: { my: `center top+${functions.getSeiVersion().startsWith('4') ? "70" : "30"}`, at: "center top", of: window },
     width: 600,
     show: 100,
     modal: true,
     open: () => {
-      $("#btnSelecaoDoc").prop('disabled', true).addClass('ui-button-disabled ui-state-disabled')
-      functions.getDocsArvore()
+      $("#btnSelecaoDoc").prop('disabled', true).addClass('ui-button-disabled ui-state-disabled');
+      $('#docModelo .chosen-container').hide();//ajuste para compatibilidade com SEI PRO no SEI 4
+      functions.getDocsArvore();
     },
     buttons: [
       {

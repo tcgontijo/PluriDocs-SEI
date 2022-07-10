@@ -5,16 +5,23 @@ let dynamicFields = [];
 let CSVData = [];
 let CSVHeaders = [];
 let dataCrossing = []
-
 let selectedModel = {};
 let CSVFileName = '';
 let docsNames = '';
-
 let aborted = false;
 
-let ajax1 = null;
-
 // export const getURLExtensao = () => chrome.runtime.getURL("js/injector.js").toString.replace("js/injector.js", '');
+
+export const setSeiVersion = () => {
+  const logoSeiTitle = $(`img[title^=Sistema]`).attr('title')
+  const version = logoSeiTitle.substring(logoSeiTitle.lastIndexOf(" ") + 1, logoSeiTitle.length);
+
+  localStorage.setItem('versaoSei', version);
+}
+
+export const getSeiVersion = () => {
+  return localStorage.getItem('versaoSei');
+}
 
 const fillSelect = (select) => {
   let resultado = '';
@@ -110,9 +117,9 @@ export const getDocsArvore = () => {
     fillSelect(select);
     clearInterval(loadingInteval);
 
-  }).then(() => $("#btnSelecaoDoc").prop('disabled', false).removeClass('ui-button-disabled ui-state-disabled'))
-
-
+  }).then(() => {
+    $("#btnSelecaoDoc").prop('disabled', false).removeClass('ui-button-disabled ui-state-disabled');
+  })
 }
 
 export const clearInputs = () => $('.ui-dialog input').each(function () { $(this).val('') })
@@ -144,7 +151,7 @@ const fillModelAnalysis = (matches, selectedDoc) => {
   dynamicFields = matches.map((field) => field.trim());
 
   $('#analiseDocModelo').append(`<div id='fieldList'></div>`)
-  $('#fieldList').append(`<p class="textAnalysis"><span class='ui-icon ui-icon-arrow-r'></span> Docuemento: ${selectedDoc.nome}</p>`)
+  $('#fieldList').append(`<p class="textAnalysis"><span class='ui-icon ui-icon-arrow-r'></span> Documento: ${selectedDoc.nome}</p>`)
   if (matches.length) {
 
     let lista = `<ul class="textAnalysis">\n`;
@@ -169,7 +176,7 @@ export const CSVAnalysis = (file) => {
 
   Papa.parse(file, {
     header: true,
-    skipEmptyLines: true,
+    skipEmptyLines: "greedy",//TODO: testar "greedy" para ver se pula linhas em branco
     encoding: "UTF-8",
     complete: (results) => {
       fillCSVAnalysis(results, file.name);
@@ -193,9 +200,9 @@ const fillCSVAnalysis = (parseData, filename) => {
       lista += `<li>${field}</li>\n`
     })
     lista += '</ul>';
+    $('#fieldListCSV').append(`<p class="textAnalysis dFielTitle"><span class='ui-icon ui-icon-arrowreturn-1-s curvedArrow'></span> Quantidade de registros: ${CSVData.length}</p>`)
     $('#fieldListCSV').append(`<p class="textAnalysis dFielTitle"><span class='ui-icon ui-icon-arrowreturn-1-s curvedArrow'></span> Cabeçalhos detectados:</p>`)
     $('#fieldListCSV').append(lista);
-    $('#fieldListCSV').append(`<p class="textAnalysis dFielTitle"><span class='ui-icon ui-icon-arrowreturn-1-s curvedArrow'></span> Quantidade de registros: ${CSVData.length}</p>`)
     $("#btnConfirmAnalysis").prop('disabled', false).removeClass('ui-button-disabled ui-state-disabled');
   } else {
     $('#fieldListCSV').append(`<small class="noFieldsError">Não foi identificado nenhum cabeçalho no arquivo enviado. Verifique se a planilha não está vazia.</small>`)
@@ -275,149 +282,166 @@ export const getDocsNames = () => {
   docsNames = $('#nomesDoc').val();
 }
 
-export const execute = () => {
-  const urlNewDoc = $('#ifrVisualizacao').contents().find("img[title='Incluir Documento'").parent().attr('href');
 
-  let counter = 0;
+export const execute = async () => {
+  const urlNewDoc = $('#ifrVisualizacao').contents().find("img[title='Incluir Documento'").parent().attr('href');
 
   for (let i = 0; i < CSVData.length; i++) {
 
-    $.get(urlNewDoc).done(async (htmlChooseDocType) => {
-      const urlExpandDocList = $(htmlChooseDocType).find('#frmDocumentoEscolherTipo').attr('action')
-      $.ajax({
-        method: 'POST',
-        url: urlExpandDocList,
-        data: { hdnFiltroSerie: 'T' }
-      }).done(async (htmlExpandedDocList) => {
-
-        const htmlTypeList = $(htmlExpandedDocList).find('.ancoraOpcao')
-
-        let typeList = []
-        for (let i = 0; i < htmlTypeList.length; i++) {
-          typeList.push({
-            nome: htmlTypeList[i].textContent,
-            url: htmlTypeList[i].getAttribute("href")
-          })
-        }
-
-        let urlFormNewDoc = '';
-        typeList.some((type) => {
-          if (selectedModel.nome.startsWith(type.nome)) {
-            urlFormNewDoc = type.url;
-            return true;
-          }
-        })
-
-
-        $.get(urlFormNewDoc).done(async (htmlFormNewDoc) => {
-
-          const form = $(htmlFormNewDoc).find('#frmDocumentoCadastro')
-          const urlConfirmDocData = form.attr('action');
-
-          const numeroOpcional = form.find("#lblNumero").attr('class') === 'infraLabelOpcional';
-
-
-          let params = {};
-          form.find("input[type=hidden]").each(function () {
-            if ($(this).attr('name') && $(this).attr('id').includes('hdn')) {
-              params[$(this).attr('name')] = $(this).val();
-            }
-          });
-          form.find('input[type=text]').each(function () {
-            if ($(this).attr('id') && $(this).attr('id').includes('txt')) {
-              params[$(this).attr('id')] = $(this).val();
-            }
-          });
-          form.find('select').each(function () {
-            if ($(this).attr('id') && $(this).attr('id').includes('sel')) {
-              params[$(this).attr('id')] = $(this).val();
-            }
-          });
-          form.find('input[type=radio]').each(function () {
-            if ($(this).attr('name') && $(this).attr('name').includes('rdo')) {
-              params[$(this).attr('name')] = $(this).val();
-            }
-          });
-          params.rdoNivelAcesso = '0';
-          params.hdnFlagDocumentoCadastro = '2';
-          params.txaObservacoes = '';
-          params.txtDescricao = '';
-          params.txtProtocoloDocumentoTextoBase = selectedModel.numero;
-          params.txtNumero = numeroOpcional ? '' : CSVData[i][docsNames]//CSVRegister[docsNames];
-
-
-          $.ajax({
-            method: 'POST',
-            url: urlConfirmDocData,
-            data: params
-          }).done(async (htmlDocCreated) => {
-            const lines = htmlDocCreated.split('\n');
-            const urlEditor = lines.filter((line) => line.includes(`if ('controlador.php?acao=editor_montar`))[0].match(/'(.+)'!/)[1];
-
-
-            $.get(urlEditor).done(async (htmlEditor) => {
-
-              const urlSubmitForm = $(htmlEditor).filter((_, el) => $(el).attr('id') === 'frmEditor').attr('action');
-
-              const textAreas = $(htmlEditor).find('div#divEditores textarea');
-
-              const regex1 = new RegExp(dataCrossing.map((data) => `##${data}##`).join('|'), 'g');
-              const regex2 = new RegExp(Object.keys(specialChars).join('|'), 'g');
-
-
-              const textAreasReplaced = textAreas.map((_, el) => $(el).text().replace(regex1, (match) => CSVData[i][match.substring(2, match.length - 2)].replace(regex2, (match) => specialChars[match])))
-
-
-              let params = {};
-
-              textAreasReplaced.each((i, textArea) => {
-                params[$(textAreas).eq(i).attr('name')] = textArea;
-              });
-
-
-              $(htmlEditor).find('input[type=hidden').each((_, input) => {
-                params[$(input).attr('name')] = $(input).val();
-              })
-
-
-              $.ajax({
-                method: 'POST',
-                url: urlSubmitForm,
-                data: params
-              }).done((htmlConfirmDoc) => {
-
-                $('#progress').html(`<p style="text-align:center">${++counter}/${CSVData.length}</p>`);
-
-              }).then(() => {
-                if (counter === CSVData.length) {
-                  $('#ifrArvore').contents()[0].location.reload();
-                  setTimeout(() => {
-                    $('#cancelExecute').hide();
-                    $('#progress').html(`<p style="text-align:center">Reprodução em lote finalizada com sucesso!</p>`)
-                    setTimeout(() => {
-                      $('#execucao').dialog('close');
-                      $('#cancelExecute').show();
-                    }, 1500);
-                  }, 500)
-                }
-              })
-            })
-          })
-        })
-      })
-    })
+    console.log("😎 👉 aborted", aborted);
     if (aborted) break;
-    console.log("😎 👉 aborted -> ", aborted);
+
+    const urlExpandDocList = await clickNewDoc(urlNewDoc);
+    console.log("😎 👉 urlExpandDocList", urlExpandDocList);
+    const urlFormNewDoc = await selectDocType(urlExpandDocList);
+    const { urlConfirmDocData, params } = await formNewDoc(urlFormNewDoc, CSVData[i]);
+    console.log("😎 👉 urlConfirmDocData", urlConfirmDocData);
+    const urlEditor = await confirmDocData(urlConfirmDocData, params);
+    const { urlSubmitForm, paramsSaveDoc } = await editDocContent(urlEditor, CSVData[i]);
+    await saveDoc(urlSubmitForm, paramsSaveDoc, i + 1, CSVData.length);
   }
 
-  $('#progress').html(`<p style="text-align:center">Preparando ambiente</p>`)
-
+  $('#ifrArvore').contents()[0].location.reload();
+  setTimeout(() => {
+    $('#cancelExecute').hide();//TODO: implementar disabled ao invés de hide
+    $('#progress').html(`<p style="text-align:center">${aborted ? "Progresso cancelado!" : "Reprodução em lote finalizada com sucesso!"}</p>`)
+    setTimeout(() => {
+      $('#execucao').dialog('close');
+      $('#cancelExecute').show();
+      $('#progress').html(`<p style="text-align:center">Preparando ambiente</p>`)
+      aborted = false;
+    }, 2000);
+  }, 500)
 }
 
+
+
+
+const clickNewDoc = async (urlNewDoc) => {
+  const htmlChooseDocType = await $.get(urlNewDoc).done(htmlChooseDocType => {
+    return
+  })
+  return $(htmlChooseDocType).find('#frmDocumentoEscolherTipo').attr('action')
+}
+const selectDocType = async (urlExpandDocList) => {
+  const htmlExpandedDocList = await $.ajax({
+    method: 'POST',
+    url: urlExpandDocList,
+    data: { hdnFiltroSerie: 'T' }
+  })
+
+  const htmlTypeList = $(htmlExpandedDocList).find('.ancoraOpcao')
+  let typeList = []
+  for (let i = 0; i < htmlTypeList.length; i++) {
+    typeList.push({
+      nome: htmlTypeList[i].textContent,
+      urlFormNewDoc: htmlTypeList[i].getAttribute("href")
+    })
+  }
+  let url = '';
+  typeList.some((type) => {
+    if (selectedModel.nome.startsWith(type.nome)) {
+      url = type.urlFormNewDoc;
+      return true;
+    }
+  })
+  return url;
+}
+const formNewDoc = async (urlFormNewDoc, data) => {
+  const htmlFormNewDoc = await $.get(urlFormNewDoc);
+
+  const form = $(htmlFormNewDoc).find('#frmDocumentoCadastro')
+  const urlConfirmDocData = form.attr('action');
+
+  const numeroOpcional = form.find("#lblNumero").attr('class') === 'infraLabelOpcional';
+
+  let params = {};
+  form.find("input[type=hidden]").each(function () {
+    if ($(this).attr('name') && $(this).attr('id').includes('hdn')) {
+      params[$(this).attr('name')] = $(this).val();
+    }
+  });
+  form.find('input[type=text]').each(function () {
+    if ($(this).attr('id') && $(this).attr('id').includes('txt')) {
+      params[$(this).attr('id')] = $(this).val();
+    }
+  });
+  form.find('select').each(function () {
+    if ($(this).attr('id') && $(this).attr('id').includes('sel')) {
+      params[$(this).attr('id')] = $(this).val();
+    }
+  });
+  form.find('input[type=radio]').each(function () {
+    if ($(this).attr('name') && $(this).attr('name').includes('rdo')) {
+      params[$(this).attr('name')] = $(this).val();
+    }
+  });
+  params.rdoNivelAcesso = '0';
+  params.hdnFlagDocumentoCadastro = '2';
+  params.txaObservacoes = '';
+  params.txtDescricao = '';
+  params.txtProtocoloDocumentoTextoBase = selectedModel.numero;
+  params.txtNumero = numeroOpcional ? '' : data[docsNames]
+
+
+  return { urlConfirmDocData, params };
+}
+const confirmDocData = async (urlConfirmDocData, params) => {
+  const htmlDocCreated = await $.ajax({
+    method: 'POST',
+    url: urlConfirmDocData,
+    data: params
+  })
+  const lines = htmlDocCreated.split('\n');
+  if (getSeiVersion().startsWith("3"))
+    return lines.filter((line) => line.includes(`if ('controlador.php?acao=editor_montar`))[0].match(/'(.+)'!/)[1];
+  else if (getSeiVersion().startsWith("4"))
+    return lines.filter((line) => line.includes(`infraAbrirJanela('controlador.php?acao=editor_montar`))[0].match(/'(.+?)'/)[0].replaceAll("'", "");
+
+}
+const editDocContent = async (urlEditor, data) => {
+
+  const htmlEditor = await $.get(urlEditor);
+
+  const urlSubmitForm = $(htmlEditor).filter((_, el) => $(el).attr('id') === 'frmEditor').attr('action');
+
+  const textAreas = $(htmlEditor).find('div#divEditores textarea');
+
+  const regex1 = new RegExp(dataCrossing.map((data) => `##${data}##`).join('|'), 'g');
+  const regex2 = new RegExp(Object.keys(specialChars).join('|'), 'g');
+
+  const textAreasReplaced = textAreas.map((_, el) =>
+    $(el).text().replace(regex1, (match) =>
+      data[match.substring(2, match.length - 2)].replace(regex2, (match) => specialChars[match])
+    )
+  )
+
+  let paramsSaveDoc = {};
+  textAreasReplaced.each((i, textArea) => {
+    paramsSaveDoc[$(textAreas).eq(i).attr('name')] = textArea;
+  });
+
+  $(htmlEditor).find('input[type=hidden').each((_, input) => {
+    paramsSaveDoc[$(input).attr('name')] = $(input).val();
+  })
+
+  return { urlSubmitForm, paramsSaveDoc }
+
+}
+const saveDoc = async (urlSubmitForm, paramsSaveDoc, current, total) => (
+  $.ajax({
+    method: 'POST',
+    url: urlSubmitForm,
+    data: paramsSaveDoc
+  }).done(htmlConfirmDoc => {
+    !aborted && $('#progress').html(`<p style="text-align:center">${current}/${total}</p>`);
+  }
+  ));
+
+
 export const abortAjax = () => {
-
   aborted = true;
-
-  $('#ifrArvore').contents()[0].location.reload();
+  $('#cancelExecute').hide();
+  $('#progress').html(`<p style="text-align:center">Cancelando progresso</p>`)
 }
 

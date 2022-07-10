@@ -1,6 +1,9 @@
 import * as functions from '../functions/functions.js'
 
 const ModalAnaliseDocModelo = () => {
+
+  const seiVersion = functions.getSeiVersion();
+
   $('body').append(`
   <div id="analiseDocModelo" title="Documento modelo - Campos dinâmicos">
   <p>Análise do documento modelo:</p>
@@ -14,9 +17,10 @@ const ModalAnaliseDocModelo = () => {
     },
     resizable: false,
     width: 600,
+    maxHeight: 550,
     modal: true,
     show: 200,
-    position: { my: "center top+30", at: "center top", of: window },
+    position: { my: `center top+${functions.getSeiVersion().startsWith('4') ? "70" : "30"}`, at: "center top", of: window },
     buttons: [
       {
         id: 'btnConfirmAnalysis',

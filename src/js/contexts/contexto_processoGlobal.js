@@ -5,10 +5,11 @@ import ModalSelecaoBaseDados from "../components/ModalSelecaoBaseDados.js"
 import ModalAnaliseCSV from "../components/ModalAnaliseCSV.js"
 import ModalCruzamentoDados from "../components/ModalCruzamentoDados.js"
 import ModalLoader from "../components/ModalLoader.js"
+import { setSeiVersion } from "../functions/functions.js"
 
+setSeiVersion();
 
 BotaoMock();
-
 
 ModalLoader();
 
