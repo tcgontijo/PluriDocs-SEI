@@ -165,6 +165,9 @@ const fillModelAnalysis = (matches, selectedDoc) => {
   } else {
     $('#fieldList').append(`<small class="noFieldsError">Não foi identificado nenhum campo dinâmico no documento modelo informado. Verifique se os mesmos foram redigidos corretamente com o padrão ##nome do campo##.</small>`)
   }
+
+  adjustModalPosition('analiseDocModelo');
+
 }
 
 export const CSVAnalysis = (file) => {
@@ -180,9 +183,10 @@ export const CSVAnalysis = (file) => {
     encoding: "UTF-8",
     complete: (results) => {
       fillCSVAnalysis(results, file.name);
+      $("#loaderAnalysisCSV").remove();
+      adjustModalPosition('analiseCSV');
     }
   })
-  $("#loaderAnalysisCSV").remove();
 }
 
 const fillCSVAnalysis = (parseData, filename) => {
@@ -276,6 +280,18 @@ export const printDataCrossing = () => {
     // </div>
 
   }
+
+  adjustModalPosition('cruzData');
+  setTimeout(() => $('#cruzData')[0].scrollTo(0, 0), 300);
+}
+
+const adjustModalPosition = label => {
+  const modal = $(`div[aria-describedby='${label}']`)[0];
+  const modalHeight = modal.offsetHeight;
+  const windowHeight = window.innerHeight;
+  const newModalTopDistance = (windowHeight - modalHeight) / 2;
+
+  $(modal).css('top', newModalTopDistance);
 }
 
 export const getDocsNames = () => {
@@ -288,14 +304,11 @@ export const execute = async () => {
 
   for (let i = 0; i < CSVData.length; i++) {
 
-    console.log("😎 👉 aborted", aborted);
     if (aborted) break;
 
     const urlExpandDocList = await clickNewDoc(urlNewDoc);
-    console.log("😎 👉 urlExpandDocList", urlExpandDocList);
     const urlFormNewDoc = await selectDocType(urlExpandDocList);
     const { urlConfirmDocData, params } = await formNewDoc(urlFormNewDoc, CSVData[i]);
-    console.log("😎 👉 urlConfirmDocData", urlConfirmDocData);
     const urlEditor = await confirmDocData(urlConfirmDocData, params);
     const { urlSubmitForm, paramsSaveDoc } = await editDocContent(urlEditor, CSVData[i]);
     await saveDoc(urlSubmitForm, paramsSaveDoc, i + 1, CSVData.length);

@@ -17,7 +17,6 @@ const ModalSelecaoBaseDados = () => {
     width: 600,
     modal: true,
     show: 200,
-    position: { my: `center top+${functions.getSeiVersion().startsWith('4') ? "70" : "30"}`, at: "center top", of: window },
     buttons: [
       {
         id: 'btnEnviaCSV',
