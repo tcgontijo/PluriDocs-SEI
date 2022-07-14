@@ -2,8 +2,6 @@ import * as functions from '../functions/functions.js'
 
 const ModalAnaliseDocModelo = () => {
 
-  const seiVersion = functions.getSeiVersion();
-
   $('body').append(`
   <div id="analiseDocModelo" title="Documento modelo - Campos dinâmicos">
   <p>Análise do documento modelo:</p>

@@ -20,7 +20,7 @@ const ModalSelecaoDoc = () => {
     modal: true,
     open: () => {
       $("#btnSelecaoDoc").prop('disabled', true).addClass('ui-button-disabled ui-state-disabled');
-      $('#docModelo .chosen-container').hide();//ajuste para compatibilidade com SEI PRO no SEI 4
+      $('#docModelo .chosen-container').hide();//Ajuste para compatibilidade com SEI PRO no SEI 4
       functions.getDocsArvore();
     },
     buttons: [
@@ -34,9 +34,8 @@ const ModalSelecaoDoc = () => {
             $(this).dialog("close");
             functions.clearInputs();
           } else {
-            /* Isola o número do documento a partir do nome */
             const selected = $(this).find('select').val().trim()
-            const nrDoc = selected.substring(selected.lastIndexOf(' '), selected.length).match(/\d+/i)[0];
+            const nrDoc = selected.substring(selected.lastIndexOf(' '), selected.length).match(/\d+/i)[0];//Isola o número do documento a partir do nome
             functions.docAnalysis(nrDoc);
             $('#analiseDocModelo').dialog('open');
             $(this).dialog("close");

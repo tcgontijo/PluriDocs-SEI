@@ -1,6 +1,8 @@
 import BotaoAcao from "../components/BotaoAcao.js"
 
-//Botão na área de ações para chamar o serviço
+/**
+ * Arranjo para mostrar o botão somente quando o estiver na página inicial de um processo 
+ */
 
 !$('#ifrArvoreHtml')[0] &&
   !$(`img[title='Reabrir Processo']`)[0] &&

@@ -17,7 +17,6 @@ const ModalAnaliseCSV = () => {
     maxHeight: (window.innerHeight * 0.9),
     modal: true,
     show: 200,
-    // position: { my: `center top+${functions.getSeiVersion().startsWith('4') ? "70" : "30"}`, at: "center top", of: window },
     buttons: [
       {
         id: 'btnConfirmAnalysisCSV',
