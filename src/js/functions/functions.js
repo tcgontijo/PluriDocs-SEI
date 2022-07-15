@@ -11,6 +11,7 @@ let CSVFileName = '';
 let docsNames = '';
 let aborted = false;
 let flagError = false;
+let flagConfirmSpecialChars = false;
 
 export const setSeiVersion = () => {
   const logoSeiTitle = $(`img[title^=Sistema]`).attr('title')
@@ -304,6 +305,8 @@ export const getDocsNames = () => {
 
 export const execute = async () => {
 
+  aborted = false;
+
   const urlNewDoc = $('#ifrVisualizacao').contents().find("img[title='Incluir Documento'").parent().attr('href');
 
   const regex = new RegExp(Object.keys(normalChars).join('|'));
@@ -319,6 +322,7 @@ Deseja continuar?
     if (!confirmSpecialChars) {
       $('#execucao').dialog('close');
       $("#cruzData").dialog("open");
+      flagConfirmSpecialChars = true;
       return;
     }
   }
@@ -342,11 +346,12 @@ Deseja continuar?
       response6.success && $('#progress').html(`<p style="text-align:center">${i + 1}/${CSVData.length}</p>`);
 
     } catch (e) {
+      console.log("aborted -> ", aborted)
       if (e.message && e.message === "cancel") {
         $('#ifrArvore').contents()[0].location.reload();
         setTimeout(() => {
           $('#cancelExecute').hide();
-          $('#progress').html(`<p style="text-align:center">${aborted ? "Progresso cancelado!" : "Reprodução em lote finalizada com sucesso!"}</p>`)
+          $('#progress').html(`<p style="text-align:center">Progresso finalizado!</p>`)
           setTimeout(() => {
             $('#execucao').dialog('close');
             $('#cancelExecute').show();
@@ -377,7 +382,6 @@ const clickNewDoc = async (urlNewDoc) => {
     success: true
   }
 }
-
 const selectDocType = async (urlExpandDocList) => {
 
   const htmlExpandedDocList = await $.ajax({
@@ -478,7 +482,6 @@ const confirmDocData = async (urlConfirmDocData, params) => {
   };
 
 }
-
 const editDocContent = async (urlEditor, data) => {
 
   const htmlEditor = await $.get(urlEditor);//TODO: Lançar exceção, identificar e excluir o doc gerado erroneamente
@@ -530,10 +533,14 @@ const saveDoc = async (urlSubmitForm, paramsSaveDoc) => {
 }
 
 export const abortAjax = () => {
-  if (!flagError) {
+  if (!flagError && !flagConfirmSpecialChars) {
     aborted = true;
     $('#cancelExecute').hide();
     $('#progress').html(`<p style="text-align:center">Cancelando progresso</p>`)
+  } else {
+    flagError = false;
+    flagConfirmSpecialChars = false;
+    aborted = false;
   }
 }
 

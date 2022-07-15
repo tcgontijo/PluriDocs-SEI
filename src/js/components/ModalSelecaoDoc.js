@@ -25,6 +25,14 @@ const ModalSelecaoDoc = () => {
     },
     buttons: [
       {
+        id: "helpButton",
+        text: "Ajuda",
+        prepend: `<span class='ui-icon ui-icon-circle-b-help'></span>`,
+        click: function () {
+          window.open("http://www.google.com")
+        }
+      },
+      {
         id: 'btnSelecaoDoc',
         text: "Ok",
         prepend: `<span class='ui-icon ui-icon-circle-b-check'></span>`,

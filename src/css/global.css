@@ -1,3 +1,8 @@
+.modalPluri #helpButton {
+    position: relative;
+    right: 332px;
+}
+
 .modalPluri .ui-dialog-buttonset {
     display: flex;
     justify-content: flex-end;
