@@ -42,6 +42,13 @@ const ModalAnaliseCSV = () => {
           $(this).dialog("close");
           functions.clearInputs();
         }
+      },
+      {
+        text: "Ajuda",
+        prepend: `<span class='ui-icon ui-icon-circle-b-help'></span>`,
+        click: function () {
+          window.open("https://tcgontijo.github.io/PluriDocs-SEI/help")
+        }
       }
     ]
   });
