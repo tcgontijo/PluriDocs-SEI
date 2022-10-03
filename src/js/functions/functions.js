@@ -348,6 +348,7 @@ Deseja continuar?
       if (i + 1 === CSVData.length) throw new Error("cancel");
 
     } catch (e) {
+      console.log(e)
       if (e.message && e.message === "cancel") {
         $('#ifrArvore').contents()[0].location.reload();
         setTimeout(() => {
@@ -464,6 +465,8 @@ const confirmDocData = async (urlConfirmDocData, params) => {
     url: urlConfirmDocData,
     data: params
   })
+  console.log("😎 👉 htmlDocCreated", htmlDocCreated);
+
   const lines = htmlDocCreated.split('\n');
   let urlEditor = '';
   if (getSeiVersion().startsWith("3")) {
