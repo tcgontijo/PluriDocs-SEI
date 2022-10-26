@@ -7,10 +7,7 @@ const ModalErro = () => {
     <p>Eita! Algo deu errado na replicação de documentos 😔</p>
     <br>
     <p>Verifique as configurações selecionadas e tente novamente.</p>
-    <br><br>
-    <p style="background-color=lightyellow">⚠️ A extensão <span style="font-weight: 900 !important;">SEI PRO</span> tem gerado erros na execução da Pluridocs.⚠️</p>
-    <p style="background-color=lightyellow">⚠️ Desabilite-a e tente novamente. ⚠️</p>
-    <br><br>
+    <br>
     <small>Caso o problema persista, entre em contato com o desenvolvedor através do email:</small>
     <br><br>
     <a href="mailto:gontijo.tulio@gmail.com" style="font-size: 12.5px">gontijo.tulio@gmail.com</a>

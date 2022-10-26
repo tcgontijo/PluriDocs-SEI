@@ -307,7 +307,7 @@ export const execute = async () => {
 
   aborted = false;
 
-  const urlNewDoc = $('#ifrVisualizacao').contents().find("img[title='Incluir Documento'").parent().attr('href');
+  const urlNewDoc = $('#ifrVisualizacao').contents().find("img[alt='Incluir Documento'").parent().attr('href');
 
   const regex = new RegExp(Object.keys(normalChars).join('|'));
   const hasSpecialChars = CSVData.some(data => data[docsNames].match(regex))
