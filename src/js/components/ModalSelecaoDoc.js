@@ -21,6 +21,7 @@ const ModalSelecaoDoc = () => {
     open: () => {
       $("#btnSelecaoDoc").prop('disabled', true).addClass('ui-button-disabled ui-state-disabled');
       $('#docModelo .chosen-container').hide();//Ajuste para compatibilidade com SEI PRO no SEI 4
+      $('#docModelo').css('overflow','hidden');
       functions.getDocsArvore();
     },
     buttons: [
