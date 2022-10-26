@@ -348,7 +348,6 @@ Deseja continuar?
       if (i + 1 === CSVData.length) throw new Error("cancel");
 
     } catch (e) {
-      console.log(e)
       if (e.message && e.message === "cancel") {
         $('#ifrArvore').contents()[0].location.reload();
         setTimeout(() => {
@@ -362,6 +361,7 @@ Deseja continuar?
         }, 500)
       } else {
         flagError = true;
+        console.log("Erro 😢 -> ", e);
         $('#execucao').dialog('close');
         $('#modalErro').dialog('open');
       }
@@ -449,7 +449,7 @@ const formNewDoc = async (urlFormNewDoc, data) => {
   params.txtDescricao = '';
   params.txtProtocoloDocumentoTextoBase = selectedModel.numero;
   const regex = new RegExp(Object.keys(normalChars).join('|'), 'g');
-  params.txtNumero = numeroOpcional ? '' : data[docsNames].replace(regex, (match) => normalChars[match]);
+  params.txtNumero = numeroOpcional ? '' : data[docsNames].replace(regex, (match) => normalChars[match]).substring(0,50);
 
   if (aborted) throw new Error("cancel");
   return {
@@ -465,7 +465,6 @@ const confirmDocData = async (urlConfirmDocData, params) => {
     url: urlConfirmDocData,
     data: params
   })
-  console.log("😎 👉 htmlDocCreated", htmlDocCreated);
 
   const lines = htmlDocCreated.split('\n');
   let urlEditor = '';
