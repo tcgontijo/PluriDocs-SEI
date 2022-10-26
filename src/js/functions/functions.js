@@ -12,6 +12,7 @@ let docsNames = '';
 let aborted = false;
 let flagError = false;
 let flagConfirmSpecialChars = false;
+let forceNames = false;
 
 export const setSeiVersion = () => {
   const logoSeiTitle = $(`img[title^=Sistema]`).attr('title')
@@ -272,17 +273,13 @@ export const printDataCrossing = () => {
         <p>Nome do documento na árvore de processos*</p>
         <select id="nomesDoc">${selectData}</select>
         <small>*Alguns documentos possuem a propriedade <b>Número</b> que quando preenchida exibe o valor na árvore de processos logo após o tipo. Exemplo: Anexo Contrato (Anexo = tipo e Contrato=Número)</small>
+        <div class="divInputForceNames">
+        <input id="checkForceNames" type="checkbox">
+        <label for="checkForceNames">Forçar atribuição de nomes na Árvore (Pode gerar erros 💀)</label>
+        </div>
       </div>
       </div>
       `)
-
-    //Implementação de opção de exclusão de documento modelo após término
-    /*<hr style="all:revert">
-    <div id="checkDeleteModel">
-      <input type="checkbox" checked>
-      <p id="labelCheckDeleteModel">Excluir Documento Modelo após procedimento</p>
-    </div>
-    */
 
   }
 
@@ -306,6 +303,8 @@ export const getDocsNames = () => {
 export const execute = async () => {
 
   aborted = false;
+
+  forceNames = $("#checkForceNames").is(":checked");
 
   const urlNewDoc = $('#ifrVisualizacao').contents().find("img[alt='Incluir Documento'").parent().attr('href');
 
@@ -449,7 +448,14 @@ const formNewDoc = async (urlFormNewDoc, data) => {
   params.txtDescricao = '';
   params.txtProtocoloDocumentoTextoBase = selectedModel.numero;
   const regex = new RegExp(Object.keys(normalChars).join('|'), 'g');
-  params.txtNumero = numeroOpcional ? '' : data[docsNames].replace(regex, (match) => normalChars[match]).substring(0,50);
+
+  if (!numeroOpcional | forceNames) {
+    params.txtNumero = data[docsNames].replace(regex, (match) => normalChars[match]).substring(0, 50);
+  } else {
+    params.txtNumero = '';
+  }
+
+
 
   if (aborted) throw new Error("cancel");
   return {

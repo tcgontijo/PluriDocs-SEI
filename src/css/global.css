@@ -7,8 +7,10 @@
     margin-bottom: 10px;
 }
 
-#labelCheckDeleteModel {
+.divInputForceNames label {
     margin: 10px !important;
+    font-size: 15px;
+    cursor: pointer;    
 }
 
 .modalPluri {
@@ -86,12 +88,12 @@
     border-radius: 5px;
 }
 
-#checkDeleteModel {
+.divInputForceNames {
     display: flex;
     flex-direction: row;
 }
 
-#checkDeleteModel input {
+.divInputForceNames input {
     width: auto;
     align-self: center;
 }
