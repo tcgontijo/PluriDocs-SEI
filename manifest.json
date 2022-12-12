@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "PluriDocs - SEI!",
-  "version": "0.0.7.1",
+  "version": "0.0.7.2",
   "description":"Extensão para o SEI com a funcão de inserção de documentos em lote em um processo utilizando um arquivo .CSV como base de dados.", 
   "icons": {
     "16": "src/icons/logo-16.png",

@@ -1,6 +1,5 @@
 import { specialChars, normalChars } from '../util/encodingTables.js';
 
-
 let dataDocs = [];
 let dynamicFields = [];
 let CSVData = [];
@@ -267,8 +266,8 @@ export const printDataCrossing = () => {
             ${tbody}
           </tbody>
         </table>
-    
-      <hr style="all:revert">
+    ${getSeiVersion().startsWith("3") ?
+        `<hr style="all:revert">
       <div>
         <p>Nome do documento na árvore de processos*</p>
         <select id="nomesDoc">${selectData}</select>
@@ -279,7 +278,7 @@ export const printDataCrossing = () => {
         </div>
       </div>
       </div>
-      `)
+      `: ""}`)
 
   }
 
@@ -304,25 +303,29 @@ export const execute = async () => {
 
   aborted = false;
 
-  forceNames = $("#checkForceNames").is(":checked");
-
   const urlNewDoc = $('#ifrVisualizacao').contents().find("img[alt='Incluir Documento'").parent().attr('href');
 
-  const regex = new RegExp(Object.keys(normalChars).join('|'));
-  const hasSpecialChars = CSVData.some(data => data[docsNames].match(regex))
-  if (hasSpecialChars) {
-    const confirmSpecialChars = confirm(`
+
+  if (getSeiVersion().startsWith("3")) {
+
+    forceNames = $("#checkForceNames").is(":checked");
+
+    const regex = new RegExp(Object.keys(normalChars).join('|'));
+    const hasSpecialChars = CSVData.some(data => data[docsNames].match(regex))
+    if (hasSpecialChars) {
+      const confirmSpecialChars = confirm(`
 Os nomes escolhidos para constar na árvore de processos contém caracteres especiais.
 
-O ideal é que não possuam. Portanto, é possível que ocorram alguns problemas de formatação.
+O ideal é que não possuam.Portanto, é possível que ocorram alguns problemas de formatação.
 
-Deseja continuar?
-`)
-    if (!confirmSpecialChars) {
-      $('#execucao').dialog('close');
-      $("#cruzData").dialog("open");
-      flagConfirmSpecialChars = true;
-      return;
+Deseja continuar ?
+      `)
+      if (!confirmSpecialChars) {
+        $('#execucao').dialog('close');
+        $("#cruzData").dialog("open");
+        flagConfirmSpecialChars = true;
+        return;
+      }
     }
   }
 
