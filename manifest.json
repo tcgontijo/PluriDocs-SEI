@@ -14,6 +14,7 @@
         "src/js/libs/jquery-3.6.0.min.js",
         "src/js/libs/jquery-ui.js",
         "src/js/libs/papaparse.js",
+        "src/js/libs/jschardet.min.js",
         "src/js/injectors/injetor_processoGlobal.js"
       ],
       "css": [

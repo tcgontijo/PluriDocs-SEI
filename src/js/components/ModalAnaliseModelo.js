@@ -26,6 +26,7 @@ const ModalAnaliseDocModelo = () => {
         click: function () {
           $(this).dialog("close");
           $("#baseDados").dialog("open");
+          functions.detectEncodingCSV();
         }
       },
       {

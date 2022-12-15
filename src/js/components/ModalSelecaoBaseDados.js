@@ -26,6 +26,7 @@ const ModalSelecaoBaseDados = () => {
         click: () => {
           $('#baseDados small').remove();
           const file = $("#inputBD")[0].files[0];
+          
           if (file.name.substring(file.name.lastIndexOf("."), file.name.length).toLocaleLowerCase().trim() === ".csv") {
             functions.CSVAnalysis($("#inputBD")[0].files[0]);
             $('#analiseCSV').dialog('open');

@@ -170,6 +170,19 @@ const fillModelAnalysis = (matches, selectedDoc) => {
 
 }
 
+export const detectEncodingCSV = () => {
+  $("#inputBD").on("change", function () {
+    console.log("mudou")
+    const file = $(this)[0].files[0];
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      let csvResult = e.target.result.split(/\r|\n|\r\n/);
+      $("#inputBD").attr('encoding', jschardet.detect(csvResult.toString()).encoding.toLowerCase());
+    }
+    reader.readAsBinaryString(file);
+  });
+}
+
 export const CSVAnalysis = (file) => {
 
   $('#fieldListCSV').remove();
@@ -180,7 +193,7 @@ export const CSVAnalysis = (file) => {
   Papa.parse(file, {
     header: true,
     skipEmptyLines: "greedy",
-    encoding: "windows-1252",
+    encoding: $("#inputBD").attr('encoding') === "utf-8" ? "utf-8" : "windows-1252",
     complete: (results) => {
       fillCSVAnalysis(results, file.name);
       $("#loaderAnalysisCSV").remove();

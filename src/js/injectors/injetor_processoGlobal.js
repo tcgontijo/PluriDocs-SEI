@@ -10,6 +10,7 @@ $(function () {
   `);
 
     $.getScript(chrome.runtime.getURL("src/js/libs/papaparse.js"));
+    $.getScript(chrome.runtime.getURL("src/js/libs/jschardet.min.js"));
   });
 
 });
