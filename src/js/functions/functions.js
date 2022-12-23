@@ -172,7 +172,6 @@ const fillModelAnalysis = (matches, selectedDoc) => {
 
 export const detectEncodingCSV = () => {
   $("#inputBD").on("change", function () {
-    console.log("mudou")
     const file = $(this)[0].files[0];
     const reader = new FileReader();
     reader.onload = function (e) {
@@ -530,7 +529,8 @@ const editDocContent = async (urlEditor, data) => {
   });
 
   $(htmlEditor).find('input[type=hidden').each((_, input) => {
-    paramsSaveDoc[$(input).attr('name')] = $(input).val();
+    if (!$(input).attr('name').toLowerCase().includes('unidade'))
+      paramsSaveDoc[$(input).attr('name')] = $(input).val().replace(regex2, (match) => specialChars[match]);
   })
 
   if (aborted) throw new Error("cancel");
@@ -552,7 +552,7 @@ const saveDoc = async (urlSubmitForm, paramsSaveDoc) => {
   if (responseSave.startsWith("OK")) {
     return { success: true }
   } else {
-    throw Error();
+    throw new Error(responseSave);
   }
 
 }
