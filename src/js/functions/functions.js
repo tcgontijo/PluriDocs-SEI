@@ -290,6 +290,15 @@ export const printDataCrossing = () => {
         </div>
       </div>
       </div>
+      `
+      : getSeiVersion().includes("4.0.9") ?
+      `<hr style="all:revert">
+      <div>
+        <p>Nome do documento na árvore de processos*</p>
+        <select id="nomesDoc">${selectData}</select>
+        <small>*Somente alguns tipos de documentos suportam</small>
+      </div>
+      </div>
       `: ""}`)
 
   }
@@ -430,6 +439,8 @@ const selectDocType = async (urlExpandDocList) => {
 const formNewDoc = async (urlFormNewDoc, data) => {
 
   const htmlFormNewDoc = await $.get(urlFormNewDoc);
+
+  console.log(htmlFormNewDoc);
 
   const form = $(htmlFormNewDoc).find('#frmDocumentoCadastro')
   const urlConfirmDocData = form.attr('action');
